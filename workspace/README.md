@@ -19,11 +19,38 @@
 
 ## 📱 界面预览
 
-| 首页问答 | 设置中心 |
+### 核心功能
+
+| 首页智能问答 | 全部记录列表 |
 |:---:|:---:|
-| ![首页](screenshots/01-home.png) | ![设置](screenshots/02-settings.png) |
-| **AI 管理控制台** | **全部记录** |
-| ![管理控制台](screenshots/03-admin.png) | ![全部记录](screenshots/04-records.png) |
+| ![首页](screenshots/01-home.png) | ![全部记录](screenshots/04-records.png) |
+| AI 自然语言提问，快速找到答案 | 分类浏览所有记忆记录 |
+
+| 记录详情 | 新增记录 |
+|:---:|:---:|
+| ![记录详情](screenshots/05-record-detail.png) | ![新增记录](screenshots/06-record-form.png) |
+| 查看和编辑完整记录信息 | 支持位置 / 日程 / 备忘三种类型 |
+
+| 快速语音录入 | 设置中心 |
+|:---:|:---:|
+| ![快速记录](screenshots/07-quick-capture.png) | ![设置](screenshots/02-settings.png) |
+| 长按说话，自动识别并分类 | 主题切换、数据管理、AI 配置 |
+
+### AI 与会员
+
+| AI 用量管理控制台 | Pro 会员升级 |
+|:---:|:---:|
+| ![管理控制台](screenshots/03-admin.png) | ![升级页](screenshots/08-upgrade.png) |
+| 调用统计、请求日志、数据导出 | 解锁更多 AI 调用次数和高级功能 |
+
+### 多主题支持
+
+| 玻璃主题（暗色） | 经典主题（系统） |
+|:---:|:---:|
+| ![玻璃主题](screenshots/09-theme-glass.png) | ![经典主题](screenshots/10-theme-classic.png) |
+| 深邃玻璃质感，沉浸式体验 | 清爽系统风格，简洁高效 |
+
+> 还有暖色主题可选，在设置中随时切换，也支持跟随系统。
 
 ## 🏗️ 技术栈
 
