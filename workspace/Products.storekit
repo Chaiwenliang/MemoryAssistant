@@ -1,0 +1,89 @@
+{
+  "identifier" : "A1B2C3D4",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "0",
+    "_developerTeamID" : "XXXXXXXXXX",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 0,
+    "_locale" : "zh_CN",
+    "_storefront" : "CHN",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21482999",
+      "localizations" : [
+
+      ],
+      "name" : "MemoryAssistant Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "12",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6670012345",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "按月订阅记忆助手 Pro，启用 AI 智能回答。",
+              "displayName" : "Pro 月度会员",
+              "locale" : "zh_CN"
+            }
+          ],
+          "productID" : "com.example.MemoryAssistant.pro.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Pro Monthly",
+          "subscriptionGroupID" : "21482999",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "98",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6670012346",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "按年订阅记忆助手 Pro，启用 AI 智能回答。",
+              "displayName" : "Pro 年度会员",
+              "locale" : "zh_CN"
+            }
+          ],
+          "productID" : "com.example.MemoryAssistant.pro.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Pro Yearly",
+          "subscriptionGroupID" : "21482999",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

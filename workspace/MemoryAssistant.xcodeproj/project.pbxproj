@@ -1,0 +1,556 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0086F57AF88F242BF11C0071 /* MemoryStatsStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37DE9E89B18EE92B8214077 /* MemoryStatsStrip.swift */; };
+		0718A9D5B49597148B49FFBE /* SpeechRecognizerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3461B644E725112B65B63529 /* SpeechRecognizerService.swift */; };
+		0D2B63EF84951BF52036492A /* AllRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCE995B975F559A014F016B /* AllRecordsView.swift */; };
+		0F1E42918E12A47EEF9E42E5 /* MemoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577215001FE375F48B1490C3 /* MemoryRowView.swift */; };
+		193D3B065BF82EF9923EB557 /* MemoryQueryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC455AA4F4C876F2084296 /* MemoryQueryRouter.swift */; };
+		1F81FC1F1DE161BB674A01DF /* CompoundIngredientExpander.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89CFB100A0B864831D141D /* CompoundIngredientExpander.swift */; };
+		204DF2A989FCF64C4CBE94EA /* VoiceHoldGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC9842476F3619BD2893074 /* VoiceHoldGesture.swift */; };
+		230557CA27B9825DF9908F35 /* QueryResultRecordActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5808A3EE920291B5D384B /* QueryResultRecordActions.swift */; };
+		28739046A1725E3ED025CC44 /* LLMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549F92030744C1ECF2D137DD /* LLMConfig.swift */; };
+		2A60FAD906BB724D1CEFC80A /* MemoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4151E801BDBF63B19811E37 /* MemoryFormView.swift */; };
+		2D116398F447B8ECE82917AC /* MemoryDonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76860F38E3CD95FC558741 /* MemoryDonutChart.swift */; };
+		2F3E6C36577CC7FDBB990153 /* MemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061BEBA100B29CBA34B70614 /* MemoryStore.swift */; };
+		31931555750D3E54B4967CE4 /* BottomInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66826485D7FA766FD6789AD /* BottomInputBar.swift */; };
+		3EFC4A02DFB7B8D96FC10BB4 /* MemoryDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D2C5097F2762B7931FFA7 /* MemoryDraft.swift */; };
+		431F58A60468A31B688270F7 /* MemoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315138E8E4CCF7DB5D7A8F3A /* MemoryListView.swift */; };
+		433AC9294BE61600D751B4B0 /* MemoryDraftParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EB2C716B86161BA3BC4017 /* MemoryDraftParser.swift */; };
+		4781E1EFC6AD104CC119DEDD /* SheetPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA04EC0430DCBC4FDB556FB /* SheetPresentation.swift */; };
+		4E41D439E21D4782C8CE0D60 /* HomeChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206E7552F2EC512337493B3D /* HomeChrome.swift */; };
+		5ACD6B0ED2410558D9AD834C /* MemoryCaptureOrganizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F6438F49479A546C92E44E /* MemoryCaptureOrganizer.swift */; };
+		624248337B28D981594C11DA /* MemoryAssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67807AD664FA75481D7D978 /* MemoryAssistantApp.swift */; };
+		6939E291B6785899DB40B7A8 /* AdminConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3AC0312316B10BF089560 /* AdminConsoleView.swift */; };
+		6EE5889F7A2BD205736E585D /* MemoryBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71DF7A479AA47797631036 /* MemoryBrain.swift */; };
+		78EC2D3E562A6F8119AA6182 /* MemoryCaptureGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D6778260FDB79FF9B8F66 /* MemoryCaptureGate.swift */; };
+		7B123973DE0BA35C58C01343 /* LLMRequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834FAA624B54B0B9C9F4C650 /* LLMRequestLogger.swift */; };
+		833A5DEF1FF97B29DC74BB85 /* MemoryRecordOrganizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922B1AD57B24A064C38203D5 /* MemoryRecordOrganizer.swift */; };
+		8589F8C89E0368814DD0F21F /* MemorySearchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235ECDBC7CE58CB9848F3CF /* MemorySearchEngine.swift */; };
+		92E21B18417A8BB069F5F19D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD3D33AC41EB6805DBFE2E /* SettingsView.swift */; };
+		92F47F579CA5F3709E790132 /* MemoryRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB868EEFF0E4B53B37E890D /* MemoryRecord.swift */; };
+		93FD65D8E4291442A1DDE643 /* MemoryIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F8D2C976A0F9F6C35B1C69 /* MemoryIntents.swift */; };
+		9D05B42209DD2EA7725A22F0 /* ChineseSchedulePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1576856CA2366F07841386 /* ChineseSchedulePicker.swift */; };
+		9F01DDCD8FBBFB1E00D395D7 /* CapturePreviewEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA028EBCBE0320A1B9974C3C /* CapturePreviewEditor.swift */; };
+		A0835FA7317E3EE8B84F6639 /* MemoryCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FFAAB35A424EFF7610C756 /* MemoryCategory.swift */; };
+		A1C459102B276628F35AF6A2 /* VoiceWaveformOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36815C85B3792EB0B6D6F710 /* VoiceWaveformOverlay.swift */; };
+		B03D04BD87BADEC8DAA1DF84 /* UpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FB8EF170151F4274A15AE9 /* UpgradeView.swift */; };
+		BBBB1D877429C68859155BBC /* LLMUsageTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D673E8A9FA79BF41560B3E /* LLMUsageTracker.swift */; };
+		BBC7B18065E2EC542A7CE22E /* MemoryInventoryAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A268257F49E441F7DEBDD79E /* MemoryInventoryAnswer.swift */; };
+		BC72FDF4AEF3708A12A70CF9 /* LLMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3631ECD8911E33D2102AA4B3 /* LLMService.swift */; };
+		C39CB831A1CF830D41A85170 /* QuickCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4575238278CFB99F56BDAD /* QuickCaptureView.swift */; };
+		C696BD2A2B97361F54632566 /* MemoryAppEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F473D49C4DF1DB2C6C319217 /* MemoryAppEntity.swift */; };
+		C6E6D40AAAC84C077291424C /* MemoryDashboardStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CAAF5242D57BE3A3628153 /* MemoryDashboardStats.swift */; };
+		D2E8F3594E53F4EEF20494F4 /* IngredientInventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2472185B340A9A27023FFC33 /* IngredientInventory.swift */; };
+		D6714A95522ED335CD866BCB /* UIDesignPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFFBA4A554B72A9621F7BF5 /* UIDesignPreview.swift */; };
+		DD4D5846F77FD45EA817F4BD /* LLMSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D94E2A724AC218846A0704 /* LLMSecrets.swift */; };
+		E2B0DE4EDD481A5F6BF40701 /* LLMSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117943C856E954B471A6994 /* LLMSettings.swift */; };
+		E668D92B04373D1BA36F46F7 /* MemoryProStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02339D11854BF84C7F64142F /* MemoryProStore.swift */; };
+		E83019C6A27BF8DB1838B52D /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB21766E1D9D75F93D038D2 /* AppTheme.swift */; };
+		E8445AE6B47A941D83FC8C2B /* CookingAdvisor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B6A50431AC7C2AA28C426 /* CookingAdvisor.swift */; };
+		EC709B9E94B30EF78B34D2CA /* MemoryPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720138DC1741CDF1D92561A /* MemoryPersistence.swift */; };
+		F065955F85C4F67F1A2E13A5 /* MemoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C73679BB77939B96B61F425 /* MemoryListViewModel.swift */; };
+		F8D06FDA60A031176141A44A /* MemoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8725B20ABFD1DBE6BA21A7D /* MemoryDetailView.swift */; };
+		F9DA8E4F1601A6ED99EC03E0 /* CaptureEditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15D795AA80D86FD8F4252D /* CaptureEditState.swift */; };
+		FBF7088EE8676E4BFD0276C2 /* MemoryUpdateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3135FD55D6CFF737ED3D2 /* MemoryUpdateRouter.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		016D6778260FDB79FF9B8F66 /* MemoryCaptureGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCaptureGate.swift; sourceTree = "<group>"; };
+		01D3AC0312316B10BF089560 /* AdminConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminConsoleView.swift; sourceTree = "<group>"; };
+		02339D11854BF84C7F64142F /* MemoryProStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryProStore.swift; sourceTree = "<group>"; };
+		05F8D2C976A0F9F6C35B1C69 /* MemoryIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryIntents.swift; sourceTree = "<group>"; };
+		061BEBA100B29CBA34B70614 /* MemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStore.swift; sourceTree = "<group>"; };
+		19CAAF5242D57BE3A3628153 /* MemoryDashboardStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDashboardStats.swift; sourceTree = "<group>"; };
+		1AB21766E1D9D75F93D038D2 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		1BFFBA4A554B72A9621F7BF5 /* UIDesignPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDesignPreview.swift; sourceTree = "<group>"; };
+		1CBD3D33AC41EB6805DBFE2E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		206E7552F2EC512337493B3D /* HomeChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeChrome.swift; sourceTree = "<group>"; };
+		2472185B340A9A27023FFC33 /* IngredientInventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientInventory.swift; sourceTree = "<group>"; };
+		315138E8E4CCF7DB5D7A8F3A /* MemoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryListView.swift; sourceTree = "<group>"; };
+		3461B644E725112B65B63529 /* SpeechRecognizerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizerService.swift; sourceTree = "<group>"; };
+		3631ECD8911E33D2102AA4B3 /* LLMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMService.swift; sourceTree = "<group>"; };
+		36815C85B3792EB0B6D6F710 /* VoiceWaveformOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceWaveformOverlay.swift; sourceTree = "<group>"; };
+		3E3B6A50431AC7C2AA28C426 /* CookingAdvisor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingAdvisor.swift; sourceTree = "<group>"; };
+		42EB2C716B86161BA3BC4017 /* MemoryDraftParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDraftParser.swift; sourceTree = "<group>"; };
+		47F6438F49479A546C92E44E /* MemoryCaptureOrganizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCaptureOrganizer.swift; sourceTree = "<group>"; };
+		4EF5808A3EE920291B5D384B /* QueryResultRecordActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryResultRecordActions.swift; sourceTree = "<group>"; };
+		501D2C5097F2762B7931FFA7 /* MemoryDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDraft.swift; sourceTree = "<group>"; };
+		5117943C856E954B471A6994 /* LLMSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMSettings.swift; sourceTree = "<group>"; };
+		52FB8EF170151F4274A15AE9 /* UpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeView.swift; sourceTree = "<group>"; };
+		549F92030744C1ECF2D137DD /* LLMConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMConfig.swift; sourceTree = "<group>"; };
+		577215001FE375F48B1490C3 /* MemoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRowView.swift; sourceTree = "<group>"; };
+		5B4575238278CFB99F56BDAD /* QuickCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCaptureView.swift; sourceTree = "<group>"; };
+		5DC3135FD55D6CFF737ED3D2 /* MemoryUpdateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUpdateRouter.swift; sourceTree = "<group>"; };
+		6235ECDBC7CE58CB9848F3CF /* MemorySearchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorySearchEngine.swift; sourceTree = "<group>"; };
+		69FFAAB35A424EFF7610C756 /* MemoryCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCategory.swift; sourceTree = "<group>"; };
+		6C73679BB77939B96B61F425 /* MemoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryListViewModel.swift; sourceTree = "<group>"; };
+		78D673E8A9FA79BF41560B3E /* LLMUsageTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMUsageTracker.swift; sourceTree = "<group>"; };
+		834FAA624B54B0B9C9F4C650 /* LLMRequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMRequestLogger.swift; sourceTree = "<group>"; };
+		8782BDBE60D5E2F8BD1D4DBB /* MemoryAssistant.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MemoryAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BCE995B975F559A014F016B /* AllRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordsView.swift; sourceTree = "<group>"; };
+		8CA04EC0430DCBC4FDB556FB /* SheetPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetPresentation.swift; sourceTree = "<group>"; };
+		922B1AD57B24A064C38203D5 /* MemoryRecordOrganizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRecordOrganizer.swift; sourceTree = "<group>"; };
+		A268257F49E441F7DEBDD79E /* MemoryInventoryAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryInventoryAnswer.swift; sourceTree = "<group>"; };
+		A37DE9E89B18EE92B8214077 /* MemoryStatsStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStatsStrip.swift; sourceTree = "<group>"; };
+		AA76860F38E3CD95FC558741 /* MemoryDonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDonutChart.swift; sourceTree = "<group>"; };
+		B67807AD664FA75481D7D978 /* MemoryAssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAssistantApp.swift; sourceTree = "<group>"; };
+		B8725B20ABFD1DBE6BA21A7D /* MemoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDetailView.swift; sourceTree = "<group>"; };
+		BA028EBCBE0320A1B9974C3C /* CapturePreviewEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePreviewEditor.swift; sourceTree = "<group>"; };
+		BCEC455AA4F4C876F2084296 /* MemoryQueryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryQueryRouter.swift; sourceTree = "<group>"; };
+		CD15D795AA80D86FD8F4252D /* CaptureEditState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureEditState.swift; sourceTree = "<group>"; };
+		D8D94E2A724AC218846A0704 /* LLMSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMSecrets.swift; sourceTree = "<group>"; };
+		DB89CFB100A0B864831D141D /* CompoundIngredientExpander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundIngredientExpander.swift; sourceTree = "<group>"; };
+		DFC9842476F3619BD2893074 /* VoiceHoldGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceHoldGesture.swift; sourceTree = "<group>"; };
+		E720138DC1741CDF1D92561A /* MemoryPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryPersistence.swift; sourceTree = "<group>"; };
+		EB71DF7A479AA47797631036 /* MemoryBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBrain.swift; sourceTree = "<group>"; };
+		F4151E801BDBF63B19811E37 /* MemoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryFormView.swift; sourceTree = "<group>"; };
+		F473D49C4DF1DB2C6C319217 /* MemoryAppEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAppEntity.swift; sourceTree = "<group>"; };
+		F66826485D7FA766FD6789AD /* BottomInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomInputBar.swift; sourceTree = "<group>"; };
+		FE1576856CA2366F07841386 /* ChineseSchedulePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChineseSchedulePicker.swift; sourceTree = "<group>"; };
+		FEB868EEFF0E4B53B37E890D /* MemoryRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRecord.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0F8DB846CFD8A438A9B28140 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CD15D795AA80D86FD8F4252D /* CaptureEditState.swift */,
+				69FFAAB35A424EFF7610C756 /* MemoryCategory.swift */,
+				501D2C5097F2762B7931FFA7 /* MemoryDraft.swift */,
+				FEB868EEFF0E4B53B37E890D /* MemoryRecord.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1769E9D2D4BDF756968FCC81 /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				F473D49C4DF1DB2C6C319217 /* MemoryAppEntity.swift */,
+				05F8D2C976A0F9F6C35B1C69 /* MemoryIntents.swift */,
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
+		242058E91E09EAE2E6F7046E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8782BDBE60D5E2F8BD1D4DBB /* MemoryAssistant.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3088CA456C388001C5A4FB80 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DB89CFB100A0B864831D141D /* CompoundIngredientExpander.swift */,
+				3E3B6A50431AC7C2AA28C426 /* CookingAdvisor.swift */,
+				2472185B340A9A27023FFC33 /* IngredientInventory.swift */,
+				549F92030744C1ECF2D137DD /* LLMConfig.swift */,
+				834FAA624B54B0B9C9F4C650 /* LLMRequestLogger.swift */,
+				D8D94E2A724AC218846A0704 /* LLMSecrets.swift */,
+				3631ECD8911E33D2102AA4B3 /* LLMService.swift */,
+				5117943C856E954B471A6994 /* LLMSettings.swift */,
+				78D673E8A9FA79BF41560B3E /* LLMUsageTracker.swift */,
+				EB71DF7A479AA47797631036 /* MemoryBrain.swift */,
+				016D6778260FDB79FF9B8F66 /* MemoryCaptureGate.swift */,
+				47F6438F49479A546C92E44E /* MemoryCaptureOrganizer.swift */,
+				19CAAF5242D57BE3A3628153 /* MemoryDashboardStats.swift */,
+				42EB2C716B86161BA3BC4017 /* MemoryDraftParser.swift */,
+				A268257F49E441F7DEBDD79E /* MemoryInventoryAnswer.swift */,
+				E720138DC1741CDF1D92561A /* MemoryPersistence.swift */,
+				02339D11854BF84C7F64142F /* MemoryProStore.swift */,
+				BCEC455AA4F4C876F2084296 /* MemoryQueryRouter.swift */,
+				922B1AD57B24A064C38203D5 /* MemoryRecordOrganizer.swift */,
+				6235ECDBC7CE58CB9848F3CF /* MemorySearchEngine.swift */,
+				061BEBA100B29CBA34B70614 /* MemoryStore.swift */,
+				5DC3135FD55D6CFF737ED3D2 /* MemoryUpdateRouter.swift */,
+				3461B644E725112B65B63529 /* SpeechRecognizerService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3AD341AC539E6A1AB1B8CBC2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				01D3AC0312316B10BF089560 /* AdminConsoleView.swift */,
+				8BCE995B975F559A014F016B /* AllRecordsView.swift */,
+				B8725B20ABFD1DBE6BA21A7D /* MemoryDetailView.swift */,
+				F4151E801BDBF63B19811E37 /* MemoryFormView.swift */,
+				315138E8E4CCF7DB5D7A8F3A /* MemoryListView.swift */,
+				5B4575238278CFB99F56BDAD /* QuickCaptureView.swift */,
+				1CBD3D33AC41EB6805DBFE2E /* SettingsView.swift */,
+				1BFFBA4A554B72A9621F7BF5 /* UIDesignPreview.swift */,
+				52FB8EF170151F4274A15AE9 /* UpgradeView.swift */,
+				BFC1C468D7B42620DB4975BB /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		530314E911CE4C179D4F6F58 /* MemoryAssistant */ = {
+			isa = PBXGroup;
+			children = (
+				911B2AD7B1011D41219126A2 /* App */,
+				1769E9D2D4BDF756968FCC81 /* Intents */,
+				0F8DB846CFD8A438A9B28140 /* Models */,
+				3088CA456C388001C5A4FB80 /* Services */,
+				B7E1D1BEB51F882111E8E9F2 /* ViewModels */,
+				3AD341AC539E6A1AB1B8CBC2 /* Views */,
+			);
+			path = MemoryAssistant;
+			sourceTree = "<group>";
+		};
+		7E5FC963977E36A447659DF4 = {
+			isa = PBXGroup;
+			children = (
+				530314E911CE4C179D4F6F58 /* MemoryAssistant */,
+				242058E91E09EAE2E6F7046E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		911B2AD7B1011D41219126A2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B67807AD664FA75481D7D978 /* MemoryAssistantApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B7E1D1BEB51F882111E8E9F2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6C73679BB77939B96B61F425 /* MemoryListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BFC1C468D7B42620DB4975BB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1AB21766E1D9D75F93D038D2 /* AppTheme.swift */,
+				F66826485D7FA766FD6789AD /* BottomInputBar.swift */,
+				BA028EBCBE0320A1B9974C3C /* CapturePreviewEditor.swift */,
+				FE1576856CA2366F07841386 /* ChineseSchedulePicker.swift */,
+				206E7552F2EC512337493B3D /* HomeChrome.swift */,
+				AA76860F38E3CD95FC558741 /* MemoryDonutChart.swift */,
+				577215001FE375F48B1490C3 /* MemoryRowView.swift */,
+				A37DE9E89B18EE92B8214077 /* MemoryStatsStrip.swift */,
+				4EF5808A3EE920291B5D384B /* QueryResultRecordActions.swift */,
+				8CA04EC0430DCBC4FDB556FB /* SheetPresentation.swift */,
+				DFC9842476F3619BD2893074 /* VoiceHoldGesture.swift */,
+				36815C85B3792EB0B6D6F710 /* VoiceWaveformOverlay.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		31298AF09D3D69C6BAB896B1 /* MemoryAssistant */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3412D8F5AAA6FAA08E1AD36A /* Build configuration list for PBXNativeTarget "MemoryAssistant" */;
+			buildPhases = (
+				D098DD1FE76CB21912B1C9A1 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MemoryAssistant;
+			packageProductDependencies = (
+			);
+			productName = MemoryAssistant;
+			productReference = 8782BDBE60D5E2F8BD1D4DBB /* MemoryAssistant.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8879CDE1161D22DAF69B62B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 871EDEFC4479A5349976A346 /* Build configuration list for PBXProject "MemoryAssistant" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7E5FC963977E36A447659DF4;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 242058E91E09EAE2E6F7046E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				31298AF09D3D69C6BAB896B1 /* MemoryAssistant */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D098DD1FE76CB21912B1C9A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6939E291B6785899DB40B7A8 /* AdminConsoleView.swift in Sources */,
+				0D2B63EF84951BF52036492A /* AllRecordsView.swift in Sources */,
+				E83019C6A27BF8DB1838B52D /* AppTheme.swift in Sources */,
+				31931555750D3E54B4967CE4 /* BottomInputBar.swift in Sources */,
+				F9DA8E4F1601A6ED99EC03E0 /* CaptureEditState.swift in Sources */,
+				9F01DDCD8FBBFB1E00D395D7 /* CapturePreviewEditor.swift in Sources */,
+				9D05B42209DD2EA7725A22F0 /* ChineseSchedulePicker.swift in Sources */,
+				1F81FC1F1DE161BB674A01DF /* CompoundIngredientExpander.swift in Sources */,
+				E8445AE6B47A941D83FC8C2B /* CookingAdvisor.swift in Sources */,
+				4E41D439E21D4782C8CE0D60 /* HomeChrome.swift in Sources */,
+				D2E8F3594E53F4EEF20494F4 /* IngredientInventory.swift in Sources */,
+				28739046A1725E3ED025CC44 /* LLMConfig.swift in Sources */,
+				7B123973DE0BA35C58C01343 /* LLMRequestLogger.swift in Sources */,
+				DD4D5846F77FD45EA817F4BD /* LLMSecrets.swift in Sources */,
+				BC72FDF4AEF3708A12A70CF9 /* LLMService.swift in Sources */,
+				E2B0DE4EDD481A5F6BF40701 /* LLMSettings.swift in Sources */,
+				BBBB1D877429C68859155BBC /* LLMUsageTracker.swift in Sources */,
+				C696BD2A2B97361F54632566 /* MemoryAppEntity.swift in Sources */,
+				624248337B28D981594C11DA /* MemoryAssistantApp.swift in Sources */,
+				6EE5889F7A2BD205736E585D /* MemoryBrain.swift in Sources */,
+				78EC2D3E562A6F8119AA6182 /* MemoryCaptureGate.swift in Sources */,
+				5ACD6B0ED2410558D9AD834C /* MemoryCaptureOrganizer.swift in Sources */,
+				A0835FA7317E3EE8B84F6639 /* MemoryCategory.swift in Sources */,
+				C6E6D40AAAC84C077291424C /* MemoryDashboardStats.swift in Sources */,
+				F8D06FDA60A031176141A44A /* MemoryDetailView.swift in Sources */,
+				2D116398F447B8ECE82917AC /* MemoryDonutChart.swift in Sources */,
+				3EFC4A02DFB7B8D96FC10BB4 /* MemoryDraft.swift in Sources */,
+				433AC9294BE61600D751B4B0 /* MemoryDraftParser.swift in Sources */,
+				2A60FAD906BB724D1CEFC80A /* MemoryFormView.swift in Sources */,
+				93FD65D8E4291442A1DDE643 /* MemoryIntents.swift in Sources */,
+				BBC7B18065E2EC542A7CE22E /* MemoryInventoryAnswer.swift in Sources */,
+				431F58A60468A31B688270F7 /* MemoryListView.swift in Sources */,
+				F065955F85C4F67F1A2E13A5 /* MemoryListViewModel.swift in Sources */,
+				EC709B9E94B30EF78B34D2CA /* MemoryPersistence.swift in Sources */,
+				E668D92B04373D1BA36F46F7 /* MemoryProStore.swift in Sources */,
+				193D3B065BF82EF9923EB557 /* MemoryQueryRouter.swift in Sources */,
+				92F47F579CA5F3709E790132 /* MemoryRecord.swift in Sources */,
+				833A5DEF1FF97B29DC74BB85 /* MemoryRecordOrganizer.swift in Sources */,
+				0F1E42918E12A47EEF9E42E5 /* MemoryRowView.swift in Sources */,
+				8589F8C89E0368814DD0F21F /* MemorySearchEngine.swift in Sources */,
+				0086F57AF88F242BF11C0071 /* MemoryStatsStrip.swift in Sources */,
+				2F3E6C36577CC7FDBB990153 /* MemoryStore.swift in Sources */,
+				FBF7088EE8676E4BFD0276C2 /* MemoryUpdateRouter.swift in Sources */,
+				230557CA27B9825DF9908F35 /* QueryResultRecordActions.swift in Sources */,
+				C39CB831A1CF830D41A85170 /* QuickCaptureView.swift in Sources */,
+				92E21B18417A8BB069F5F19D /* SettingsView.swift in Sources */,
+				4781E1EFC6AD104CC119DEDD /* SheetPresentation.swift in Sources */,
+				0718A9D5B49597148B49FFBE /* SpeechRecognizerService.swift in Sources */,
+				D6714A95522ED335CD866BCB /* UIDesignPreview.swift in Sources */,
+				B03D04BD87BADEC8DAA1DF84 /* UpgradeView.swift in Sources */,
+				204DF2A989FCF64C4CBE94EA /* VoiceHoldGesture.swift in Sources */,
+				A1C459102B276628F35AF6A2 /* VoiceWaveformOverlay.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5C84F8AAF6936EE4AFC459FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "记忆助手";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "允许你通过语音快速记录信息";
+				INFOPLIST_KEY_NSSiriUsageDescription = "允许你通过 Siri 快速查询已经记录的事项";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "允许你把语音转换成文字并保存为记录";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen = "[:]";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.MemoryAssistant;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		63B0528A5631897D246239F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = MemoryAssistant;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		69B722F9BE5481BA4DDBC91A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = MemoryAssistant;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		D550C82CE438041AF74A15CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "记忆助手";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "允许你通过语音快速记录信息";
+				INFOPLIST_KEY_NSSiriUsageDescription = "允许你通过 Siri 快速查询已经记录的事项";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "允许你把语音转换成文字并保存为记录";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen = "[:]";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.MemoryAssistant;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3412D8F5AAA6FAA08E1AD36A /* Build configuration list for PBXNativeTarget "MemoryAssistant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C84F8AAF6936EE4AFC459FD /* Debug */,
+				D550C82CE438041AF74A15CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		871EDEFC4479A5349976A346 /* Build configuration list for PBXProject "MemoryAssistant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69B722F9BE5481BA4DDBC91A /* Debug */,
+				63B0528A5631897D246239F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8879CDE1161D22DAF69B62B3 /* Project object */;
+}
