@@ -1,45 +1,76 @@
-# MemoryAssistant
+# 记忆助手 MemoryAssistant
 
-一个面向 iPhone 的“记忆助手”MVP，用来记录和检索日常信息，包括：
+> 一个面向 iPhone 的本地优先"记忆助手"，帮你记录和快速检索生活中的点滴——东西放在哪、日程安排、备忘笔记，都能一句话查到。
 
-- 某个东西放在哪里
-- 明天或某天的具体工作安排
-- 任意备忘内容
-- 通过 Siri / Shortcuts 快速提问并得到答案
+![Platform](https://img.shields.io/badge/platform-iOS-orange)
+![Swift](https://img.shields.io/badge/swift-5.9-orange)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-## 当前实现
+## ✨ 主要功能
 
-- `iOS 原生 SwiftUI` 界面
-- `本地优先` 数据存储，使用 JSON 持久化到应用沙盒
-- `统一记录模型`，同时覆盖位置记忆、日程安排、通用备忘
-- `关键词优先搜索`，支持按标题、详情、地点、标签检索
-- `App Intents` 集成，支持 Siri 查询和“明天安排”快捷指令
-- `App 内语音录入`，可把中文语音转换成文字并辅助填写记录
-- `Siri 新增记录`，支持直接说一句话写入本地记忆库
+- 🧠 **AI 智能问答** — 用自然语言提问，AI 帮你从记忆库中找到答案（支持 DeepSeek / 通义千问模型）
+- 📍 **位置记忆** — 记录物品存放位置，再也不用到处找东西
+- 📅 **日程提醒** — 快速记录会议、约会、待办事项
+- 📝 **通用备忘** — 灵感、想法、账号信息随手记
+- 🎙️ **语音输入** — 长按说话就能记录，支持中文语音识别
+- 🗣️ **Siri 集成** — 不用打开 App，直接对 Siri 说"钥匙放哪了"
+- 🎨 **多主题切换** — 暖色 / 经典 / 玻璃 / 跟随系统，四种外观任你选
+- 🔒 **本地优先** — 所有数据保存在本地沙盒，隐私安全
 
-## 项目结构
+## 📱 界面预览
 
-- `project.yml`: XcodeGen 配置文件
-- `MemoryAssistant/App`: App 入口
-- `MemoryAssistant/Models`: 数据模型
-- `MemoryAssistant/Services`: 存储与搜索逻辑
-- `MemoryAssistant/ViewModels`: 视图模型
-- `MemoryAssistant/Views`: SwiftUI 页面
-- `MemoryAssistant/Intents`: Siri / App Intents 集成
+| 首页问答 | 设置中心 |
+|:---:|:---:|
+| ![首页](screenshots/01-home.png) | ![设置](screenshots/02-settings.png) |
+| **AI 管理控制台** | **全部记录** |
+| ![管理控制台](screenshots/03-admin.png) | ![全部记录](screenshots/04-records.png) |
 
-## 在 Mac 上运行
+## 🏗️ 技术栈
 
-前提：
+- **语言**: Swift 5.9
+- **框架**: SwiftUI + UIKit 混合
+- **数据存储**: JSON 文件持久化（应用沙盒）
+- **AI 能力**: 远程 LLM API（DeepSeek / 通义千问）
+- **语音**: Speech 框架 + 本地规则解析
+- **Siri**: App Intents 框架
+- **内购**: StoreKit 2
+- **构建工具**: XcodeGen
 
-- macOS
+## 📁 项目结构
+
+```
+MemoryAssistant/
+├── App/                    # App 入口与全局依赖
+├── Models/                 # 数据模型（记录、主题、AI 服务等）
+├── Services/               # 核心服务
+│   ├── MemoryStore.swift   # 数据存储与搜索
+│   ├── LLMService.swift    # AI 大模型服务
+│   ├── LLMUsageTracker.swift  # AI 用量追踪
+│   ├── LLMRequestLogger.swift # AI 请求日志
+│   └── MemoryProStore.swift   # 会员与内购
+├── ViewModels/             # 视图模型
+├── Views/                  # SwiftUI 页面
+│   ├── MemoryListView.swift   # 主页面
+│   ├── SettingsView.swift     # 设置页
+│   ├── AllRecordsView.swift   # 全部记录
+│   ├── AdminConsoleView.swift # AI 管理控制台
+│   └── Components/            # 通用组件
+└── Intents/                # Siri / App Intents 集成
+```
+
+## 🚀 在 Mac 上运行
+
+### 环境要求
+
+- macOS 14+
 - Xcode 15+
-- 建议安装 `XcodeGen`
+- [XcodeGen](https://github.com/yonaskolb/XcodeGen)（推荐）
 
-生成工程：
+### 生成工程
 
 ```bash
 brew install xcodegen
-cd /path/to/MemoryAssistant
+cd MemoryAssistant/workspace
 xcodegen generate
 open MemoryAssistant.xcodeproj
 ```
@@ -47,82 +78,51 @@ open MemoryAssistant.xcodeproj
 然后在 Xcode 中：
 
 1. 选择 iPhone 模拟器或真机
-2. 运行 App
-3. 首次运行后可在系统 `Shortcuts` 中看到该 App 提供的快捷动作
-4. 也可以直接对 Siri 说类似的话：
+2. 按 `⌘R` 运行 App
 
-- “用记忆助手找 护照在哪里”
-- “在记忆助手中查询 明天安排”
-- “打开记忆助手看看明天安排”
-- “用记忆助手记录 护照放在书房第二层抽屉”
+### AI 功能配置（可选）
 
-## Siri 说明
+App 内置了 AI 问答能力，需要配置 API Key 才能使用：
 
-本项目使用 `App Intents`，适合第一版快速接入 Siri / Shortcuts。
+1. 在 `MemoryAssistant/Services/LLMSecrets.swift` 中填入你的 API Key
+2. 或在 App 内通过管理控制台配置
 
-当前已提供三个 Intent：
+## 🤖 AI 用量管理
 
-- `FindMemoryIntent`: 根据自然语言查询最相关记录
-- `CaptureMemoryIntent`: 根据一句自然语言新增记录
-- `TomorrowScheduleIntent`: 汇总明天的日程安排
+内置了完整的 AI 调用管理系统：
 
-如果你后续希望做到更自然的“免打开 App 回答”，建议继续增强：
+- **用量追踪** — 每日调用次数、Token 消耗、成功率统计
+- **配额管理** — 免费版每日限制，Pro 版更高额度
+- **请求日志** — 记录每次调用的模型、耗时、状态
+- **数据导出** — 支持导出 JSON / CSV 格式
+- **管理控制台** — 在设置页点击"AI 用量"进入
 
-- 搜索排序和语义检索
-- 领域词识别，例如“放哪了”“几点开会”“谁负责”
-- 更丰富的 App Shortcut 短语
-- 需要跨设备时增加云端同步
+## 🧪 测试场景建议
 
-## 第二版测试
+### 基础功能
+1. **手动新增记录** — 新建位置/日程/备忘各一条
+2. **搜索记录** — 用关键词搜索，验证结果排序
+3. **编辑与删除** — 修改记录内容、删除记录
 
-你在 Mac 上生成并运行工程后，就可以立刻开始第一轮测试。
+### 语音与 Siri
+1. **App 内语音录入** — 点击录音按钮，说"帮我记一下护照放在书房第二层抽屉"
+2. **Siri 新增** — 对 Siri 说"用记忆助手记录 钥匙放在玄关柜左边"
+3. **Siri 查询** — 对 Siri 说"用记忆助手找 钥匙在哪里"
+4. **明天安排** — 录入明天日程后，对 Siri 说"查看记忆助手的明天安排"
 
-建议用 `真机` 测试语音与 Siri，原因是：
+### AI 功能
+1. **自然语言提问** — 问"我钥匙放哪了"
+2. **多轮对话** — 连续追问相关问题
+3. **用量统计** — 在管理控制台查看调用记录
 
-- `App 内语音录入` 需要麦克风和语音识别权限
-- `Siri / Shortcuts` 在真机上的体验更完整
+## 🔮 后续规划
 
-第一轮建议测试这些场景：
+- ☁️ iCloud 同步 — 多设备数据同步
+- 🔍 向量检索 — 更精准的语义搜索
+- 📸 拍照录入 — 拍照自动识别并记录
+- 🌙 更多主题 — 持续优化视觉体验
+- 📊 云端管理后台 — 面向运营者的用户与配额管理
 
-1. 手动新增：
-   - 新建一条位置记录，例如“护照”
-   - 新建一条日程记录，例如“明天下午 3 点开会”
-2. App 内语音录入：
-   - 打开新建记录页
-   - 点击“开始录音”
-   - 说“帮我记一下护照放在书房第二层抽屉”
-   - 点击“应用识别结果”，确认标题、位置、说明是否自动填入
-3. Siri 新增：
-   - 对 Siri 说“用记忆助手记录 钥匙放在玄关柜左边”
-4. Siri 查询：
-   - 对 Siri 说“用记忆助手找 钥匙在哪里”
-5. 明天安排：
-   - 先录入一条明天的日程
-   - 再对 Siri 说“查看记忆助手的明天安排”
+## 📄 License
 
-## 第二版限制
-
-- 语音理解目前是 `规则解析`，适合位置、时间、简单备忘，不是完整自然语言智能体
-- 时间识别目前优先支持“今天 / 明天 + 数字时间”，例如“明天下午 3 点”
-- 更复杂表达如“下周三”“月底前”“后天上午”还需要继续扩展
-
-## 安卓扩展建议
-
-虽然第一版采用 iOS 原生实现，但结构上已经把核心能力拆成了：
-
-- 记录模型
-- 搜索规则
-- 持久化接口
-
-未来支持安卓时，建议：
-
-1. 抽离为后端 API 或共享数据协议
-2. 安卓端用 Kotlin + Jetpack Compose
-3. 接入 Android Assistant / App Actions
-4. 若需要多端同步，再引入云端账号体系
-
-## 当前限制
-
-- 这里生成的是可直接继续开发的源码，不在当前 Linux 沙箱内编译 iOS App
-- 搜索目前以关键词和简单规则为主，还不是向量语义检索
-- 多设备同步、账号体系、拍照录入、语音转文字暂未加入第一版
+MIT
