@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>记忆助手 · 双主题完整 UI</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+    background: #e8e8ec;
+    color: #2c2c2e;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+  .container { max-width: 1800px; margin: 0 auto; }
+
+  /* 标题区 */
+  .page-header { text-align: center; margin-bottom: 40px; }
+  .page-header .label {
+    display: inline-block; font-size: 11px; letter-spacing: 3px;
+    font-weight: 600; color: #6b6b73;
+    background: #fff; padding: 6px 14px; border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .page-header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.3px; color: #1c1c1e; margin-bottom: 6px; }
+  .page-header .subtitle { font-size: 13px; color: #6b6b73; }
+
+  /* 主题说明条 */
+  .theme-info {
+    max-width: 980px; margin: 0 auto 36px; padding: 18px 24px;
+    background: #fff; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .theme-info h3 { font-size: 14px; font-weight: 600; color: #1c1c1e; margin-bottom: 8px; }
+  .theme-info p { font-size: 12px; color: #6b6b73; line-height: 1.7; }
+  .theme-info code {
+    background: #f2f2f7; color: #1c1c1e; padding: 2px 8px; border-radius: 6px;
+    font-family: "SF Mono", Menlo, monospace; font-size: 11px;
+  }
+
+  /* 分组标题 */
+  .section-title {
+    max-width: 1600px; margin: 48px auto 16px; padding: 0 8px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .section-title .num {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: #1c1c1e; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+  .section-title .t { font-size: 18px; font-weight: 700; color: #1c1c1e; }
+  .section-title .desc { font-size: 12px; color: #6b6b73; }
+
+  /* 双手机并排（固定 iPhone 尺寸） */
+  .phone-pair {
+    display: flex; justify-content: center; gap: 32px;
+    flex-wrap: wrap; max-width: 1200px; margin: 0 auto; padding: 0 16px;
+  }
+
+  .phone-card {
+    background: #fff; border-radius: 20px; padding: 18px 18px 22px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+    width: 390px; /* iPhone 15 内屏宽度 */
+    flex-shrink: 0;
+  }
+  .phone-card.light { background: #fff; }
+  .phone-card.dark {
+    background: linear-gradient(145deg, #1c1c1e, #2c2c2e);
+  }
+  .phone-card-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .phone-card-head .name {
+    font-size: 13px; font-weight: 600;
+    color: #1c1c1e;
+  }
+  .phone-card.dark .phone-card-head .name { color: #e8e8f0; }
+  .phone-card-head .badge {
+    font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .phone-card.light .badge { background: #f2f2f7; color: #1c1c1e; }
+  .phone-card.dark .badge { background: rgba(109,213,250,0.18); color: #6dd5fa; }
+
+  /* 手机外壳（iPhone 15 风格 · 约 390 × 844 逻辑像素） */
+  .phone-frame {
+    position: relative;
+    width: 100%;
+    border-radius: 56px;
+    padding: 14px;
+    background: linear-gradient(145deg, #3a3a3c, #0a0a0c);
+    box-shadow:
+      inset 0 0 0 1.5px rgba(255,255,255,0.08),
+      inset 0 0 0 0.5px rgba(255,255,255,0.12),
+      0 24px 48px rgba(0,0,0,0.28),
+      0 10px 20px rgba(0,0,0,0.15);
+  }
+  .phone-screen {
+    border-radius: 44px;
+    overflow: hidden;
+    position: relative;
+    height: 820px;
+    display: flex;
+    flex-direction: column;
+  }
+  .light .phone-screen { background: #f6f6f4; }
+  .dark .phone-screen {
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);
+  }
+
+  /* 动态岛（Dynamic Island） */
+  .dynamic-island {
+    position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 36px;
+    background: #000;
+    border-radius: 18px;
+    z-index: 10;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+
+  /* 状态栏 —— iOS 风格 */
+  .status-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 28px 6px;
+    font-size: 15px; font-weight: 600; letter-spacing: -0.2px;
+    flex-shrink: 0;
+    margin-top: 10px; /* 给动态岛留空间 */
+  }
+  .status-bar .sb-right {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 12px;
+  }
+  .light .status-bar { color: #1c1c1e; }
+  .dark .status-bar { color: #e8e8f0; }
+
+  .sb-icon {
+    display: inline-block;
+    width: 16px; height: 10px;
+  }
+  .sb-battery {
+    width: 26px; height: 12px;
+    border: 1.5px solid currentColor;
+    border-radius: 3px;
+    position: relative;
+    display: inline-block;
+    opacity: 0.85;
+  }
+  .sb-battery::after {
+    content: '';
+    position: absolute;
+    right: -3px; top: 3px;
+    width: 2px; height: 4px;
+    background: currentColor;
+    border-radius: 0 1px 1px 0;
+    opacity: 0.5;
+  }
+  .sb-battery-fill {
+    position: absolute;
+    top: 1.5px; left: 1.5px; bottom: 1.5px;
+    width: 75%;
+    background: currentColor;
+    border-radius: 1.5px;
+  }
+
+  /* ========== 通用文字色 ========== */
+  .title-xl { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+  .title-sm { font-size: 14px; font-weight: 600; }
+  .caption { font-size: 11px; }
+  .light .title-xl, .light .title-sm { color: #1c1c1e; }
+  .light .caption { color: #6b6b73; }
+  .dark .title-xl, .dark .title-sm { color: #e8e8f0; }
+  .dark .caption { color: #9f9fb0; }
+
+  /* 页面内边距 —— 可滚动内容区 */
+  .screen-body { padding: 6px 18px 12px; flex: 1; overflow-y: auto; }
+  .phone-screen .input-bar-wrap { flex-shrink: 0; }
+
+  /* ========== 方案 A（Light）样式 ========== */
+  .light .card {
+    background: #fff; border: 1px solid #e5e5ea;
+    border-radius: 14px; padding: 14px;
+  }
+  .light .row-sep { border-bottom: 1px solid #e5e5ea; }
+
+  /* 搜索框（改进版） */
+  .search-bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px; border-radius: 12px;
+  }
+  .light .search-bar {
+    background: #fff; border: 1px solid #e5e5ea;
+  }
+  .dark .search-bar {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .search-icon {
+    width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+  .light .search-icon { color: #6b6b73; }
+  .dark .search-icon { color: #9f9fb0; }
+  .search-placeholder {
+    font-size: 13px; font-weight: 500;
+  }
+  .light .search-placeholder { color: #8e8e93; }
+  .dark .search-placeholder { color: #9f9fb0; }
+  .search-action {
+    margin-left: auto; font-size: 14px; font-weight: 600;
+  }
+  .light .search-action { color: #1c1c1e; }
+  .dark .search-action { color: #6dd5fa; }
+
+  /* 筛选芯片（改进版） */
+  .filter-row {
+    display: flex; gap: 8px; overflow-x: auto; padding: 12px 0 4px;
+  }
+  .filter-chip {
+    padding: 8px 14px; border-radius: 10px;
+    font-size: 12px; font-weight: 500; white-space: nowrap;
+  }
+  .light .filter-chip.inactive {
+    background: #fff; color: #3c3c43; border: 1px solid #e5e5ea;
+  }
+  .light .filter-chip.active {
+    background: #1c1c1e; color: #fff;
+  }
+  .dark .filter-chip.inactive {
+    background: rgba(255,255,255,0.04); color: #c7c7d0;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .dark .filter-chip.active {
+    background: linear-gradient(135deg, #6dd5fa, #2980b9); color: #fff;
+    box-shadow: 0 2px 8px rgba(109,213,250,0.3);
+  }
+
+  /* 记忆图谱卡 */
+  .donut-card { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 14px; }
+  .light .donut-card { background: #fff; border: 1px solid #e5e5ea; }
+  .dark .donut-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+  }
+  .donut-ring {
+    width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .light .donut-ring { background: conic-gradient(#1c1c1e 0 60%, #6b6b73 60% 80%, #d1d1d6 80% 100%); }
+  .dark .donut-ring {
+    background: conic-gradient(#6dd5fa 0 60%, #ff9ec7 60% 80%, rgba(255,255,255,0.15) 80% 100%);
+    box-shadow: 0 0 20px rgba(109,213,250,0.25);
+  }
+  .donut-ring::after {
+    content: ''; position: absolute; inset: 8px; border-radius: 50%;
+  }
+  .light .donut-ring::after { background: #fff; }
+  .dark .donut-ring::after { background: #1a1a2e; }
+  .donut-info { flex: 1; }
+  .donut-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .light .donut-title { color: #1c1c1e; }
+  .dark .donut-title { color: #e8e8f0; }
+  .legend-row { display: flex; gap: 10px; font-size: 11px; }
+  .light .legend-row { color: #6b6b73; }
+  .dark .legend-row { color: #9f9fb0; }
+  .legend-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+  .light .d1 { background: #1c1c1e; } .light .d2 { background: #6b6b73; } .light .d3 { background: #d1d1d6; }
+  .dark .d1 { background: #6dd5fa; } .dark .d2 { background: #ff9ec7; } .dark .d3 { background: rgba(255,255,255,0.3); }
+
+  /* 记录行 */
+  .rec-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 0;
+  }
+  .rec-icon {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+  .light .rec-icon { background: #f2f2f7; color: #1c1c1e; }
+  .dark .rec-icon {
+    background: rgba(109,213,250,0.15); color: #6dd5fa;
+    box-shadow: 0 0 12px rgba(109,213,250,0.2);
+  }
+  .rec-icon.schedule { color: #ff9ec7; }
+  .dark .rec-icon.schedule { background: rgba(255,158,199,0.15); box-shadow: 0 0 12px rgba(255,158,199,0.2); }
+  .rec-body { flex: 1; min-width: 0; }
+  .rec-title {
+    font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .light .rec-title { color: #1c1c1e; }
+  .dark .rec-title { color: #e8e8f0; }
+  .rec-sub { font-size: 11px; margin-top: 3px; display: flex; gap: 4px; align-items: center; }
+  .light .rec-sub { color: #6b6b73; }
+  .dark .rec-sub { color: #9f9fb0; }
+  .rec-arrow { font-size: 11px; }
+  .light .rec-arrow { color: #c7c7cc; }
+  .dark .rec-arrow { color: #6b6b73; opacity: 0.7; }
+
+  .record-list { border-radius: 14px; padding: 0 14px; overflow: hidden; }
+  .light .record-list { background: #fff; border: 1px solid #e5e5ea; }
+  .dark .record-list {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .record-list .rec-row:not(:last-child) {
+    border-bottom: 1px solid;
+  }
+  .light .record-list .rec-row:not(:last-child) { border-color: #f2f2f7; }
+  .dark .record-list .rec-row:not(:last-child) { border-color: rgba(255,255,255,0.06); }
+
+  /* 快捷记录芯片 */
+  .chip-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px;
+  }
+  .chip {
+    padding: 11px 12px; border-radius: 12px;
+    font-size: 12px; font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .light .chip {
+    background: #fff; color: #1c1c1e; border: 1px solid #e5e5ea;
+  }
+  .dark .chip {
+    background: rgba(255,255,255,0.04);
+    color: #e8e8f0;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .chip-arrow { font-size: 10px; }
+  .light .chip-arrow { color: #6b6b73; }
+  .dark .chip-arrow { color: #6dd5fa; }
+
+  /* 分组小卡片 */
+  .group-label {
+    display: flex; align-items: center; justify-content: space-between;
+    margin: 12px 0 6px;
+  }
+  .group-label-t { font-size: 12px; font-weight: 600; letter-spacing: 0.3px; }
+  .light .group-label-t { color: #3c3c43; }
+  .dark .group-label-t { color: #c7c7d0; }
+  .group-label-c { font-size: 10px; font-weight: 500; }
+  .light .group-label-c { color: #6b6b73; }
+  .dark .group-label-c { color: #9f9fb0; }
+
+  /* 底部输入条（改进版） */
+  .input-bar-wrap {
+    position: relative; padding: 0 12px 18px;
+    margin-top: 14px;
+  }
+  .input-bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px; border-radius: 18px;
+  }
+  .light .input-bar { background: #fff; border: 1px solid #e5e5ea; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .dark .input-bar {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3), 0 0 20px rgba(109,213,250,0.08);
+  }
+  .mode-btn {
+    width: 44px; height: 44px; border-radius: 14px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1px; flex-shrink: 0;
+  }
+  .light .mode-btn { background: #f2f2f7; }
+  .dark .mode-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); }
+  .mode-icon { font-size: 12px; }
+  .mode-label { font-size: 9px; font-weight: 600; }
+  .light .mode-btn .mode-icon, .light .mode-btn .mode-label { color: #1c1c1e; }
+  .dark .mode-btn .mode-icon { color: #6dd5fa; }
+  .dark .mode-btn .mode-label { color: #6dd5fa; }
+
+  .input-field {
+    flex: 1; display: flex; align-items: center; gap: 8px;
+    padding: 0 12px; height: 44px; border-radius: 12px;
+    font-size: 13px;
+  }
+  .light .input-field { background: #f6f6f4; color: #1c1c1e; }
+  .dark .input-field {
+    background: rgba(255,255,255,0.04); color: #e8e8f0;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .input-field .placeholder { color: inherit; opacity: 0.55; font-weight: 500; }
+  .mic-icon {
+    font-size: 13px; margin-left: auto;
+  }
+  .light .mic-icon { color: #6b6b73; }
+  .dark .mic-icon { color: #6dd5fa; }
+
+  .ask-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: #fff; flex-shrink: 0;
+  }
+  .light .ask-btn {
+    background: linear-gradient(135deg, #3c3c43, #1c1c1e);
+    box-shadow: 0 2px 8px rgba(28,28,30,0.25);
+  }
+  .dark .ask-btn {
+    background: linear-gradient(135deg, #6dd5fa, #2980b9);
+    box-shadow: 0 4px 16px rgba(109,213,250,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  /* 页脚说明 */
+  .screen-footer {
+    text-align: center; padding: 4px 0 20px;
+    font-size: 10px;
+  }
+  .light .screen-footer { color: #c7c7cc; }
+  .dark .screen-footer { color: #6b6b73; }
+
+  /* ========== 页面 3：提问回答 ========== */
+  .qa-query {
+    padding: 14px 16px; border-radius: 14px;
+    font-size: 14px; line-height: 1.6; font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .light .qa-query {
+    background: #fff; border: 1px solid #e5e5ea; color: #1c1c1e;
+  }
+  .dark .qa-query {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #e8e8f0;
+  }
+  .qa-query-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+    margin-bottom: 8px;
+  }
+  .light .qa-query-label { color: #6b6b73; }
+  .dark .qa-query-label { color: #9f9fb0; }
+
+  /* AI 回答卡片 */
+  .ai-answer {
+    padding: 18px 16px; border-radius: 16px; position: relative;
+    margin-bottom: 14px;
+  }
+  .light .ai-answer {
+    background: #fff; border: 1px solid #e5e5ea;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .dark .ai-answer {
+    background: linear-gradient(145deg, rgba(109,213,250,0.08), rgba(255,158,199,0.05));
+    border: 1px solid rgba(109,213,250,0.2);
+    box-shadow: 0 4px 20px rgba(109,213,250,0.1), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  .ai-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .ai-badge {
+    width: 30px; height: 30px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+  }
+  .light .ai-badge { background: #1c1c1e; color: #fff; }
+  .dark .ai-badge {
+    background: linear-gradient(135deg, #6dd5fa, #ff9ec7);
+    color: #0a0a12; box-shadow: 0 0 12px rgba(109,213,250,0.4);
+  }
+  .ai-header-text { flex: 1; }
+  .ai-header-text .t { font-size: 13px; font-weight: 700; }
+  .light .ai-header-text .t { color: #1c1c1e; }
+  .dark .ai-header-text .t { color: #e8e8f0; }
+  .ai-header-text .s { font-size: 10px; margin-top: 2px; }
+  .light .ai-header-text .s { color: #6b6b73; }
+  .dark .ai-header-text .s { color: #9f9fb0; }
+
+  .ai-content { font-size: 13px; line-height: 1.75; font-weight: 500; }
+  .light .ai-content { color: #2c2c2e; }
+  .dark .ai-content { color: #d8d8e0; }
+  .ai-content .highlight { font-weight: 700; }
+  .light .ai-content .highlight { color: #1c1c1e; }
+  .dark .ai-content .highlight { color: #6dd5fa; }
+  .ai-list { margin-top: 10px; padding-left: 4px; }
+  .ai-list li {
+    list-style: none; padding: 6px 0 6px 18px; position: relative;
+    font-size: 12px; line-height: 1.6;
+  }
+  .light .ai-list li { color: #3c3c43; }
+  .dark .ai-list li { color: #c7c7d0; }
+  .ai-list li::before {
+    content: ''; position: absolute; left: 4px; top: 13px;
+    width: 5px; height: 5px; border-radius: 50%;
+  }
+  .light .ai-list li::before { background: #1c1c1e; }
+  .dark .ai-list li::before { background: #6dd5fa; box-shadow: 0 0 6px #6dd5fa; }
+
+  /* 引用记录卡（AI 回答内用到的记录） */
+  .ai-reference {
+    margin-top: 12px; padding: 10px 12px; border-radius: 10px;
+    font-size: 11px; line-height: 1.6;
+  }
+  .light .ai-reference {
+    background: #f6f6f4; color: #3c3c43;
+    border-left: 3px solid #1c1c1e;
+  }
+  .dark .ai-reference {
+    background: rgba(109,213,250,0.08); color: #c7c7d0;
+    border-left: 3px solid #6dd5fa;
+  }
+  .ai-reference strong { font-weight: 700; }
+  .light .ai-reference strong { color: #1c1c1e; }
+  .dark .ai-reference strong { color: #e8e8f0; }
+
+  /* ========== 页面 4：设置页 ========== */
+  .settings-list {
+    border-radius: 14px; overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .light .settings-list { background: #fff; border: 1px solid #e5e5ea; }
+  .dark .settings-list {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .setting-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 14px;
+  }
+  .setting-item:not(:last-child) { border-bottom: 1px solid; }
+  .light .setting-item:not(:last-child) { border-color: #f2f2f7; }
+  .dark .setting-item:not(:last-child) { border-color: rgba(255,255,255,0.06); }
+
+  .setting-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+  .setting-text { flex: 1; font-size: 13px; font-weight: 500; }
+  .light .setting-text { color: #1c1c1e; }
+  .dark .setting-text { color: #e8e8f0; }
+  .setting-value { font-size: 12px; font-weight: 500; }
+  .light .setting-value { color: #8e8e93; }
+  .dark .setting-value { color: #9f9fb0; }
+  .setting-arrow { font-size: 11px; }
+  .light .setting-arrow { color: #c7c7cc; }
+  .dark .setting-arrow { color: #6b6b73; }
+
+  /* 主题选择器 */
+  .theme-picker {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    padding: 14px; border-radius: 14px; margin-top: 8px;
+  }
+  .light .theme-picker { background: #f6f6f4; }
+  .dark .theme-picker { background: rgba(255,255,255,0.04); }
+  .theme-option {
+    padding: 10px 6px; border-radius: 12px; text-align: center;
+    border: 1.5px solid transparent;
+  }
+  .theme-option.active {
+    border-color: currentColor;
+  }
+  .theme-swatch {
+    width: 24px; height: 24px; border-radius: 50%;
+    margin: 0 auto 6px;
+    border: 2px solid rgba(255,255,255,0.6);
+  }
+  .theme-option.light-o .theme-swatch { background: #fff; border-color: #e5e5ea; }
+  .theme-option.auto .theme-swatch {
+    background: linear-gradient(135deg, #fff 0%, #fff 50%, #1a1a2e 50%, #1a1a2e 100%);
+  }
+  .theme-option.dark-o .theme-swatch { background: #1a1a2e; }
+  .theme-label { font-size: 11px; font-weight: 600; }
+  .light .theme-option.light-o { color: #1c1c1e; background: #fff; }
+  .light .theme-option.auto, .light .theme-option.dark-o { color: #6b6b73; background: #fff; border-color: #e5e5ea; }
+  .dark .theme-option.dark-o { color: #6dd5fa; background: rgba(109,213,250,0.15); border-color: #6dd5fa; }
+  .dark .theme-option.light-o, .dark .theme-option.auto { color: #c7c7d0; background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
+
+  /* 分节标题 */
+  .sec-head {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    padding: 14px 4px 6px; text-transform: uppercase;
+  }
+  .light .sec-head { color: #8e8e93; }
+  .dark .sec-head { color: #7b7b88; }
+
+  /* ========== 页面 5：详情页 ========== */
+  .detail-card { padding: 16px; border-radius: 16px; }
+  .light .detail-card { background: #fff; border: 1px solid #e5e5ea; }
+  .dark .detail-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .detail-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .light .detail-title { color: #1c1c1e; }
+  .dark .detail-title { color: #e8e8f0; }
+  .detail-meta { font-size: 11px; }
+  .light .detail-meta { color: #8e8e93; }
+  .dark .detail-meta { color: #9f9fb0; }
+
+  .detail-section { margin-top: 16px; }
+  .detail-section-h {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .light .detail-section-h { color: #8e8e93; }
+  .dark .detail-section-h { color: #7b7b88; }
+  .detail-field {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0;
+  }
+  .detail-field:not(:last-child) { border-bottom: 1px solid; }
+  .light .detail-field:not(:last-child) { border-color: #f2f2f7; }
+  .dark .detail-field:not(:last-child) { border-color: rgba(255,255,255,0.06); }
+  .detail-field-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; flex-shrink: 0; margin-top: -2px;
+  }
+  .light .detail-field-icon { background: #f2f2f7; color: #1c1c1e; }
+  .dark .detail-field-icon {
+    background: rgba(109,213,250,0.12); color: #6dd5fa;
+  }
+  .detail-field-body { flex: 1; }
+  .detail-field-label { font-size: 10px; margin-bottom: 2px; letter-spacing: 0.5px; }
+  .light .detail-field-label { color: #8e8e93; }
+  .dark .detail-field-label { color: #9f9fb0; }
+  .detail-field-value { font-size: 13px; font-weight: 500; line-height: 1.5; }
+  .light .detail-field-value { color: #1c1c1e; }
+  .dark .detail-field-value { color: #d8d8e0; }
+
+  /* 按钮组 */
+  .btn-row { display: flex; gap: 8px; margin-top: 14px; }
+  .btn {
+    flex: 1; padding: 12px; border-radius: 12px;
+    font-size: 12px; font-weight: 600; text-align: center;
+  }
+  .btn.primary { color: #fff; }
+  .light .btn.primary {
+    background: linear-gradient(135deg, #3c3c43, #1c1c1e);
+  }
+  .dark .btn.primary {
+    background: linear-gradient(135deg, #6dd5fa, #2980b9);
+    box-shadow: 0 4px 12px rgba(109,213,250,0.3);
+  }
+  .btn.secondary {
+    border: 1px solid;
+  }
+  .light .btn.secondary { color: #1c1c1e; border-color: #e5e5ea; background: #fff; }
+  .dark .btn.secondary { color: #e8e8f0; border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); }
+
+  /* 页面底部输入条外框 */
+  .screen-bottom-hint {
+    margin-top: 10px; padding: 8px 12px; border-radius: 8px;
+    font-size: 10px; text-align: center;
+  }
+  .light .screen-bottom-hint { background: #f2f2f7; color: #8e8e93; }
+  .dark .screen-bottom-hint { background: rgba(255,255,255,0.04); color: #9f9fb0; }
+
+  /* 说明文字区 */
+  .design-notes {
+    max-width: 1600px; margin: 48px auto 24px; padding: 24px;
+    background: #fff; border-radius: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .design-notes h2 { font-size: 16px; font-weight: 700; color: #1c1c1e; margin-bottom: 12px; }
+  .design-notes ul { font-size: 12px; color: #3c3c43; line-height: 1.9; padding-left: 18px; }
+  .design-notes li { margin-bottom: 2px; }
+  .design-notes strong { color: #1c1c1e; font-weight: 600; }
+
+  /* 响应式 */
+  @media (max-width: 900px) {
+    .phone-pair { flex-direction: column; align-items: center; }
+    .phone-card { width: 100%; max-width: 360px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-header">
+    <span class="label">COMPLETE UI · v1.0</span>
+    <h1>记忆助手 · 双主题完整界面</h1>
+    <div class="subtitle">Light 模式 = 方案 A 极简白灰 · Dark 模式 = 方案 C 玻璃科技</div>
+  </div>
+
+  <div class="theme-info">
+    <h3>核心说明</h3>
+    <p>
+      每个页面都同时展示 <code>Light</code>（左）和 <code>Dark</code>（右）两种模式。在实际 App 中，用户可以在「设置 → 外观」里选择 <code>浅色 / 深色 / 跟随系统</code>。
+      本次特意改进了 <code>输入框的 placeholder 呈现</code>（不再让文字贴边）、<code>搜索框的内边距与圆角</code>、以及 <code>底部输入条</code> 的整体层次（左侧模式切换 + 中间输入 + 右侧提交）。
+    </p>
+  </div>
+
+  <!-- ============ 页面 1：首页 ============ -->
+  <div class="section-title">
+    <span class="num">01</span>
+    <span class="t">首页</span>
+    <span class="desc">记忆图谱环形卡 + 最近更新 + 快捷记录</span>
+  </div>
+
+  <div class="phone-pair">
+    <!-- Light -->
+    <div class="phone-card light">
+      <div class="phone-card-head">
+        <span class="name">Light · 浅色模式</span>
+        <span class="badge">A · MINIMAL</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 14px;">
+              <div class="title-xl">记忆助手</div>
+              <div class="caption">5 条记录 · 欢迎回来</div>
+            </div>
+
+            <div class="donut-card" style="margin-bottom: 14px;">
+              <div class="donut-ring"></div>
+              <div class="donut-info">
+                <div class="donut-title">记忆图谱</div>
+                <div class="legend-row">
+                  <span><span class="legend-dot d1"></span>位置 3</span>
+                  <span><span class="legend-dot d2"></span>日程 1</span>
+                  <span><span class="legend-dot d3"></span>备忘 1</span>
+                </div>
+              </div>
+              <div class="rec-arrow">›</div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">最近更新</span>
+              <span class="group-label-c">查看全部 ›</span>
+            </div>
+            <div class="record-list" style="margin-bottom: 8px;">
+              <div class="rec-row">
+                <div class="rec-icon">📍</div>
+                <div class="rec-body">
+                  <div class="rec-title">西瓜</div>
+                  <div class="rec-sub">冰箱冷藏 · 2 小时前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon schedule">📅</div>
+                <div class="rec-body">
+                  <div class="rec-title">周五交季度报告</div>
+                  <div class="rec-sub">会议室 B · 还剩 4 天</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon">📝</div>
+                <div class="rec-body">
+                  <div class="rec-title">生日收到的书</div>
+                  <div class="rec-sub">书架第二层 · 3 天前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">快捷记录</span>
+            </div>
+            <div class="chip-grid">
+              <div class="chip"><span class="chip-arrow">↗</span><span>西瓜放冰箱</span></div>
+              <div class="chip"><span class="chip-arrow">↗</span><span>钥匙放玄关</span></div>
+              <div class="chip"><span class="chip-arrow">↗</span><span>周五交报告</span></div>
+              <div class="chip"><span class="chip-arrow">↗</span><span>洗衣液在阳台</span></div>
+            </div>
+          </div>
+
+          <div class="input-bar-wrap">
+            <div class="input-bar">
+              <div class="mode-btn">
+                <span class="mode-icon">✎</span>
+                <span class="mode-label">记下</span>
+              </div>
+              <div class="input-field">
+                <span class="placeholder">记录内容… 长按输入框语音</span>
+                <span class="mic-icon">🎤</span>
+              </div>
+              <div class="ask-btn">✦</div>
+            </div>
+            <div class="screen-bottom-hint">默认进入「记下」模式，点 ✦ 切换为提问模式</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark -->
+    <div class="phone-card dark">
+      <div class="phone-card-head">
+        <span class="name">Dark · 深色模式</span>
+        <span class="badge">C · GLASS</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 14px;">
+              <div class="title-xl">记忆助手</div>
+              <div class="caption">5 条记录 · 欢迎回来</div>
+            </div>
+
+            <div class="donut-card" style="margin-bottom: 14px;">
+              <div class="donut-ring"></div>
+              <div class="donut-info">
+                <div class="donut-title">记忆图谱</div>
+                <div class="legend-row">
+                  <span><span class="legend-dot d1"></span>位置 3</span>
+                  <span><span class="legend-dot d2"></span>日程 1</span>
+                  <span><span class="legend-dot d3"></span>备忘 1</span>
+                </div>
+              </div>
+              <div class="rec-arrow">›</div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">最近更新</span>
+              <span class="group-label-c">查看全部 ›</span>
+            </div>
+            <div class="record-list" style="margin-bottom: 8px;">
+              <div class="rec-row">
+                <div class="rec-icon">📍</div>
+                <div class="rec-body">
+                  <div class="rec-title">西瓜</div>
+                  <div class="rec-sub">冰箱冷藏 · 2 小时前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon schedule">📅</div>
+                <div class="rec-body">
+                  <div class="rec-title">周五交季度报告</div>
+                  <div class="rec-sub">会议室 B · 还剩 4 天</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon">📝</div>
+                <div class="rec-body">
+                  <div class="rec-title">生日收到的书</div>
+                  <div class="rec-sub">书架第二层 · 3 天前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">快捷记录</span>
+            </div>
+            <div class="chip-grid">
+              <div class="chip"><span class="chip-arrow">↗</span><span>西瓜放冰箱</span></div>
+              <div class="chip"><span class="chip-arrow">↗</span><span>钥匙放玄关</span></div>
+              <div class="chip"><span class="chip-arrow">↗</span><span>周五交报告</span></div>
+              <div class="chip"><span class="chip-arrow">↗</span><span>洗衣液在阳台</span></div>
+            </div>
+          </div>
+
+          <div class="input-bar-wrap">
+            <div class="input-bar">
+              <div class="mode-btn">
+                <span class="mode-icon">✎</span>
+                <span class="mode-label">记下</span>
+              </div>
+              <div class="input-field">
+                <span class="placeholder">记录内容… 长按输入框语音</span>
+                <span class="mic-icon">🎤</span>
+              </div>
+              <div class="ask-btn">✦</div>
+            </div>
+            <div class="screen-bottom-hint">默认进入「记下」模式，点 ✦ 切换为提问模式</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 页面 2：全部记录 ============ -->
+  <div class="section-title">
+    <span class="num">02</span>
+    <span class="t">全部记录</span>
+    <span class="desc">搜索 + 分类筛选 + 位置/日程/备忘分组</span>
+  </div>
+
+  <div class="phone-pair">
+    <!-- Light -->
+    <div class="phone-card light">
+      <div class="phone-card-head">
+        <span class="name">Light · 浅色模式</span>
+        <span class="badge">A · MINIMAL</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 10px;">
+              <div class="title-xl">全部记录</div>
+              <div class="caption">共 5 条 · 已归档 2 条</div>
+            </div>
+
+            <div class="search-bar" style="margin-bottom: 4px;">
+              <span class="search-icon">🔍</span>
+              <span class="search-placeholder">搜索记录，例如"冰箱"、"周五"</span>
+              <span class="search-action">取消</span>
+            </div>
+
+            <div class="filter-row">
+              <div class="filter-chip active">全部 5</div>
+              <div class="filter-chip inactive">位置 3</div>
+              <div class="filter-chip inactive">日程 1</div>
+              <div class="filter-chip inactive">备忘 1</div>
+              <div class="filter-chip inactive">已归档 2</div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">位置类 · 3 条</span>
+            </div>
+            <div class="record-list" style="margin-bottom: 8px;">
+              <div class="rec-row">
+                <div class="rec-icon">📍</div>
+                <div class="rec-body">
+                  <div class="rec-title">西瓜</div>
+                  <div class="rec-sub">冰箱冷藏 · 2 小时前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon">📍</div>
+                <div class="rec-body">
+                  <div class="rec-title">家门钥匙</div>
+                  <div class="rec-sub">玄关柜抽屉 · 昨天</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon">📍</div>
+                <div class="rec-body">
+                  <div class="rec-title">洗衣液</div>
+                  <div class="rec-sub">阳台柜子 · 上周</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">日程类 · 1 条</span>
+            </div>
+            <div class="record-list" style="margin-bottom: 8px;">
+              <div class="rec-row">
+                <div class="rec-icon schedule">📅</div>
+                <div class="rec-body">
+                  <div class="rec-title">周五交季度报告</div>
+                  <div class="rec-sub">会议室 B · 还剩 4 天</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">备忘类 · 1 条</span>
+            </div>
+            <div class="record-list">
+              <div class="rec-row">
+                <div class="rec-icon">📝</div>
+                <div class="rec-body">
+                  <div class="rec-title">生日收到的书</div>
+                  <div class="rec-sub">书架第二层 · 3 天前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-bar-wrap">
+            <div class="input-bar">
+              <div class="mode-btn">
+                <span class="mode-icon">+</span>
+                <span class="mode-label">新</span>
+              </div>
+              <div class="input-field">
+                <span class="placeholder">添加一条新记录</span>
+                <span class="mic-icon">🎤</span>
+              </div>
+              <div class="ask-btn">✦</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark -->
+    <div class="phone-card dark">
+      <div class="phone-card-head">
+        <span class="name">Dark · 深色模式</span>
+        <span class="badge">C · GLASS</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 10px;">
+              <div class="title-xl">全部记录</div>
+              <div class="caption">共 5 条 · 已归档 2 条</div>
+            </div>
+
+            <div class="search-bar" style="margin-bottom: 4px;">
+              <span class="search-icon">🔍</span>
+              <span class="search-placeholder">搜索记录，例如"冰箱"、"周五"</span>
+              <span class="search-action">取消</span>
+            </div>
+
+            <div class="filter-row">
+              <div class="filter-chip active">全部 5</div>
+              <div class="filter-chip inactive">位置 3</div>
+              <div class="filter-chip inactive">日程 1</div>
+              <div class="filter-chip inactive">备忘 1</div>
+              <div class="filter-chip inactive">已归档 2</div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">位置类 · 3 条</span>
+            </div>
+            <div class="record-list" style="margin-bottom: 8px;">
+              <div class="rec-row">
+                <div class="rec-icon">📍</div>
+                <div class="rec-body">
+                  <div class="rec-title">西瓜</div>
+                  <div class="rec-sub">冰箱冷藏 · 2 小时前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon">📍</div>
+                <div class="rec-body">
+                  <div class="rec-title">家门钥匙</div>
+                  <div class="rec-sub">玄关柜抽屉 · 昨天</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon">📍</div>
+                <div class="rec-body">
+                  <div class="rec-title">洗衣液</div>
+                  <div class="rec-sub">阳台柜子 · 上周</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">日程类 · 1 条</span>
+            </div>
+            <div class="record-list" style="margin-bottom: 8px;">
+              <div class="rec-row">
+                <div class="rec-icon schedule">📅</div>
+                <div class="rec-body">
+                  <div class="rec-title">周五交季度报告</div>
+                  <div class="rec-sub">会议室 B · 还剩 4 天</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="group-label">
+              <span class="group-label-t">备忘类 · 1 条</span>
+            </div>
+            <div class="record-list">
+              <div class="rec-row">
+                <div class="rec-icon">📝</div>
+                <div class="rec-body">
+                  <div class="rec-title">生日收到的书</div>
+                  <div class="rec-sub">书架第二层 · 3 天前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-bar-wrap">
+            <div class="input-bar">
+              <div class="mode-btn">
+                <span class="mode-icon">+</span>
+                <span class="mode-label">新</span>
+              </div>
+              <div class="input-field">
+                <span class="placeholder">添加一条新记录</span>
+                <span class="mic-icon">🎤</span>
+              </div>
+              <div class="ask-btn">✦</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 页面 3：提问回答 ============ -->
+  <div class="section-title">
+    <span class="num">03</span>
+    <span class="t">提问与回答</span>
+    <span class="desc">自然语言查询 + AI 回答卡 + 引用的原始记录</span>
+  </div>
+
+  <div class="phone-pair">
+    <!-- Light -->
+    <div class="phone-card light">
+      <div class="phone-card-head">
+        <span class="name">Light · 浅色模式</span>
+        <span class="badge">A · MINIMAL</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 14px;">
+              <div class="title-xl">提问</div>
+              <div class="caption">根据你的记录回答</div>
+            </div>
+
+            <div class="qa-query-label">· 你的问题</div>
+            <div class="qa-query">家里有什么是需要在这周吃完的？</div>
+
+            <div class="ai-answer">
+              <div class="ai-header">
+                <div class="ai-badge">AI</div>
+                <div class="ai-header-text">
+                  <div class="t">记忆助手</div>
+                  <div class="s">基于 2 条你的记录 · 刚刚</div>
+                </div>
+              </div>
+              <div class="ai-content">
+                你有 <span class="highlight">1 项食物</span> 需要在 <span class="highlight">本周内吃完</span>：
+                <ul class="ai-list">
+                  <li><strong>西瓜</strong> — 放在冰箱冷藏 2 小时了，建议在 3 天内吃完（切开后最佳口感不超过 48 小时）。</li>
+                </ul>
+                建议你切西瓜时用保鲜膜覆盖切面，放在冰箱最冷藏格。
+              </div>
+              <div class="ai-reference">
+                <strong>引用的记录：</strong> 西瓜 · 冰箱冷藏，家门钥匙 · 玄关柜抽屉
+              </div>
+            </div>
+
+            <div class="qa-query-label">· 最近提问</div>
+            <div class="record-list">
+              <div class="rec-row">
+                <div class="rec-icon">❓</div>
+                <div class="rec-body">
+                  <div class="rec-title" style="font-weight: 500;">钥匙放哪里了？</div>
+                  <div class="rec-sub">玄关柜抽屉 · 昨天</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon">❓</div>
+                <div class="rec-body">
+                  <div class="rec-title" style="font-weight: 500;">明天有什么日程？</div>
+                  <div class="rec-sub">3 件事 · 3 天前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-bar-wrap">
+            <div class="input-bar">
+              <div class="mode-btn" style="background: linear-gradient(135deg, #3c3c43, #1c1c1e);">
+                <span class="mode-icon" style="color: #fff;">✦</span>
+                <span class="mode-label" style="color: #fff;">提问</span>
+              </div>
+              <div class="input-field">
+                <span class="placeholder">问点什么，例如"钥匙在哪"</span>
+                <span class="mic-icon">🎤</span>
+              </div>
+              <div class="ask-btn">↗</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark -->
+    <div class="phone-card dark">
+      <div class="phone-card-head">
+        <span class="name">Dark · 深色模式</span>
+        <span class="badge">C · GLASS</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 14px;">
+              <div class="title-xl">提问</div>
+              <div class="caption">根据你的记录回答</div>
+            </div>
+
+            <div class="qa-query-label">· 你的问题</div>
+            <div class="qa-query">家里有什么是需要在这周吃完的？</div>
+
+            <div class="ai-answer">
+              <div class="ai-header">
+                <div class="ai-badge">AI</div>
+                <div class="ai-header-text">
+                  <div class="t">记忆助手</div>
+                  <div class="s">基于 2 条你的记录 · 刚刚</div>
+                </div>
+              </div>
+              <div class="ai-content">
+                你有 <span class="highlight">1 项食物</span> 需要在 <span class="highlight">本周内吃完</span>：
+                <ul class="ai-list">
+                  <li><strong>西瓜</strong> — 放在冰箱冷藏 2 小时了，建议在 3 天内吃完（切开后最佳口感不超过 48 小时）。</li>
+                </ul>
+                建议你切西瓜时用保鲜膜覆盖切面，放在冰箱最冷藏格。
+              </div>
+              <div class="ai-reference">
+                <strong>引用的记录：</strong> 西瓜 · 冰箱冷藏，家门钥匙 · 玄关柜抽屉
+              </div>
+            </div>
+
+            <div class="qa-query-label">· 最近提问</div>
+            <div class="record-list">
+              <div class="rec-row">
+                <div class="rec-icon">❓</div>
+                <div class="rec-body">
+                  <div class="rec-title" style="font-weight: 500;">钥匙放哪里了？</div>
+                  <div class="rec-sub">玄关柜抽屉 · 昨天</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+              <div class="rec-row">
+                <div class="rec-icon">❓</div>
+                <div class="rec-body">
+                  <div class="rec-title" style="font-weight: 500;">明天有什么日程？</div>
+                  <div class="rec-sub">3 件事 · 3 天前</div>
+                </div>
+                <div class="rec-arrow">›</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-bar-wrap">
+            <div class="input-bar">
+              <div class="mode-btn" style="background: linear-gradient(135deg, #6dd5fa, #2980b9); box-shadow: 0 4px 12px rgba(109,213,250,0.4);">
+                <span class="mode-icon" style="color: #fff;">✦</span>
+                <span class="mode-label" style="color: #fff;">提问</span>
+              </div>
+              <div class="input-field">
+                <span class="placeholder">问点什么，例如"钥匙在哪"</span>
+                <span class="mic-icon">🎤</span>
+              </div>
+              <div class="ask-btn">↗</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 页面 4：设置页 ============ -->
+  <div class="section-title">
+    <span class="num">04</span>
+    <span class="t">设置</span>
+    <span class="desc">外观主题切换 + 归档管理 + 其他选项</span>
+  </div>
+
+  <div class="phone-pair">
+    <!-- Light -->
+    <div class="phone-card light">
+      <div class="phone-card-head">
+        <span class="name">Light · 浅色模式</span>
+        <span class="badge">A · MINIMAL</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 10px;">
+              <div class="title-xl">设置</div>
+              <div class="caption">个性化你的记忆助手</div>
+            </div>
+
+            <div class="sec-head">外观</div>
+            <div class="settings-list">
+              <div class="setting-item">
+                <div class="setting-icon" style="background:#f2f2f7; color:#1c1c1e;">🎨</div>
+                <div class="setting-text">主题</div>
+                <div class="setting-value">浅色</div>
+                <div class="setting-arrow">›</div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-icon" style="background:#f2f2f7; color:#1c1c1e;">🌓</div>
+                <div class="setting-text">跟随系统</div>
+                <div class="setting-value">关</div>
+                <div class="setting-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="theme-picker">
+              <div class="theme-option light-o active">
+                <div class="theme-swatch"></div>
+                <div class="theme-label">浅色</div>
+              </div>
+              <div class="theme-option auto">
+                <div class="theme-swatch"></div>
+                <div class="theme-label">自动</div>
+              </div>
+              <div class="theme-option dark-o">
+                <div class="theme-swatch"></div>
+                <div class="theme-label">深色</div>
+              </div>
+            </div>
+
+            <div class="sec-head">记录管理</div>
+            <div class="settings-list">
+              <div class="setting-item">
+                <div class="setting-icon" style="background:#f2f2f7; color:#1c1c1e;">📦</div>
+                <div class="setting-text">已归档</div>
+                <div class="setting-value">2</div>
+                <div class="setting-arrow">›</div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-icon" style="background:#f2f2f7; color:#1c1c1e;">⚙️</div>
+                <div class="setting-text">自动归档</div>
+                <div class="setting-value">90 天</div>
+                <div class="setting-arrow">›</div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-icon" style="background:#f2f2f7; color:#1c1c1e;">📤</div>
+                <div class="setting-text">导出数据</div>
+                <div class="setting-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="sec-head">关于</div>
+            <div class="settings-list">
+              <div class="setting-item">
+                <div class="setting-icon" style="background:#f2f2f7; color:#1c1c1e;">ℹ️</div>
+                <div class="setting-text">版本</div>
+                <div class="setting-value">1.0.0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark -->
+    <div class="phone-card dark">
+      <div class="phone-card-head">
+        <span class="name">Dark · 深色模式</span>
+        <span class="badge">C · GLASS</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 10px;">
+              <div class="title-xl">设置</div>
+              <div class="caption">个性化你的记忆助手</div>
+            </div>
+
+            <div class="sec-head">外观</div>
+            <div class="settings-list">
+              <div class="setting-item">
+                <div class="setting-icon">🎨</div>
+                <div class="setting-text">主题</div>
+                <div class="setting-value">深色</div>
+                <div class="setting-arrow">›</div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-icon">🌓</div>
+                <div class="setting-text">跟随系统</div>
+                <div class="setting-value">关</div>
+                <div class="setting-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="theme-picker">
+              <div class="theme-option light-o">
+                <div class="theme-swatch"></div>
+                <div class="theme-label">浅色</div>
+              </div>
+              <div class="theme-option auto">
+                <div class="theme-swatch"></div>
+                <div class="theme-label">自动</div>
+              </div>
+              <div class="theme-option dark-o active">
+                <div class="theme-swatch"></div>
+                <div class="theme-label">深色</div>
+              </div>
+            </div>
+
+            <div class="sec-head">记录管理</div>
+            <div class="settings-list">
+              <div class="setting-item">
+                <div class="setting-icon">📦</div>
+                <div class="setting-text">已归档</div>
+                <div class="setting-value">2</div>
+                <div class="setting-arrow">›</div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-icon">⚙️</div>
+                <div class="setting-text">自动归档</div>
+                <div class="setting-value">90 天</div>
+                <div class="setting-arrow">›</div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-icon">📤</div>
+                <div class="setting-text">导出数据</div>
+                <div class="setting-arrow">›</div>
+              </div>
+            </div>
+
+            <div class="sec-head">关于</div>
+            <div class="settings-list">
+              <div class="setting-item">
+                <div class="setting-icon">ℹ️</div>
+                <div class="setting-text">版本</div>
+                <div class="setting-value">1.0.0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 页面 5：详情页 ============ -->
+  <div class="section-title">
+    <span class="num">05</span>
+    <span class="t">记录详情</span>
+    <span class="desc">查看完整字段 + 编辑/归档/删除操作</span>
+  </div>
+
+  <div class="phone-pair">
+    <!-- Light -->
+    <div class="phone-card light">
+      <div class="phone-card-head">
+        <span class="name">Light · 浅色模式</span>
+        <span class="badge">A · MINIMAL</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 12px;">
+              <div class="title-xl">西瓜</div>
+              <div class="caption">位置类记录 · 2 小时前创建</div>
+            </div>
+
+            <div class="detail-card">
+              <div class="detail-section">
+                <div class="detail-field">
+                  <div class="detail-field-icon">📍</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">存放位置</div>
+                    <div class="detail-field-value">冰箱冷藏层 · 第三格</div>
+                  </div>
+                </div>
+                <div class="detail-field">
+                  <div class="detail-field-icon">🍉</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">物品信息</div>
+                    <div class="detail-field-value">整个西瓜，约 8 斤</div>
+                  </div>
+                </div>
+                <div class="detail-field">
+                  <div class="detail-field-icon">📅</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">创建时间</div>
+                    <div class="detail-field-value">今天 14:32</div>
+                  </div>
+                </div>
+                <div class="detail-field">
+                  <div class="detail-field-icon">⚠️</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">建议食用</div>
+                    <div class="detail-field-value">3 天内，最佳在 48 小时内</div>
+                  </div>
+                </div>
+                <div class="detail-field" style="border-bottom: none; padding-bottom: 0;">
+                  <div class="detail-field-icon">📝</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">备注</div>
+                    <div class="detail-field-value">切之前用保鲜膜包好切面；吃不完记得标记"已食用"</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <div class="btn secondary">编辑</div>
+                <div class="btn secondary">归档</div>
+                <div class="btn primary">更新</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark -->
+    <div class="phone-card dark">
+      <div class="phone-card-head">
+        <span class="name">Dark · 深色模式</span>
+        <span class="badge">C · GLASS</span>
+      </div>
+      <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-right">
+              <span>●●●●</span>
+              <span style="font-size:10px;">📶</span>
+              <span class="sb-battery"><span class="sb-battery-fill"></span></span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div style="padding: 2px 2px 12px;">
+              <div class="title-xl">西瓜</div>
+              <div class="caption">位置类记录 · 2 小时前创建</div>
+            </div>
+
+            <div class="detail-card">
+              <div class="detail-section">
+                <div class="detail-field">
+                  <div class="detail-field-icon">📍</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">存放位置</div>
+                    <div class="detail-field-value">冰箱冷藏层 · 第三格</div>
+                  </div>
+                </div>
+                <div class="detail-field">
+                  <div class="detail-field-icon">🍉</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">物品信息</div>
+                    <div class="detail-field-value">整个西瓜，约 8 斤</div>
+                  </div>
+                </div>
+                <div class="detail-field">
+                  <div class="detail-field-icon">📅</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">创建时间</div>
+                    <div class="detail-field-value">今天 14:32</div>
+                  </div>
+                </div>
+                <div class="detail-field">
+                  <div class="detail-field-icon">⚠️</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">建议食用</div>
+                    <div class="detail-field-value">3 天内，最佳在 48 小时内</div>
+                  </div>
+                </div>
+                <div class="detail-field" style="border-bottom: none; padding-bottom: 0;">
+                  <div class="detail-field-icon">📝</div>
+                  <div class="detail-field-body">
+                    <div class="detail-field-label">备注</div>
+                    <div class="detail-field-value">切之前用保鲜膜包好切面；吃不完记得标记"已食用"</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <div class="btn secondary">编辑</div>
+                <div class="btn secondary">归档</div>
+                <div class="btn primary">更新</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 页面底部说明 ============ -->
+  <div class="design-notes">
+    <h2>设计说明</h2>
+    <ul>
+      <li><strong>双主题架构</strong>：Light（方案 A 极简白灰）和 Dark（方案 C 玻璃科技），两个主题共用同一套组件，仅通过 CSS class 切换配色</li>
+      <li><strong>字体与间距系统</strong>：标题 22px · 副标题 14px · 正文 13px · 小字 11px · 行间距 1.5-1.75，确保在两种主题下都有足够的阅读对比度</li>
+      <li><strong>输入框改进</strong>：placeholder 与图标之间有 10px 呼吸间距，底部输入条有左模式切换 / 中输入 / 右提交按钮三层结构，避免文字贴边</li>
+      <li><strong>圆角层级</strong>：卡片圆角 14px · 列表项无圆角（用分隔线）· 按钮圆角 10-14px · 芯片圆角 10px，层次清晰</li>
+      <li><strong>色板</strong>：Light 主色 #1c1c1e（深灰）+ #f2f2f7（浅灰） · Dark 主色 #6dd5fa（冰蓝）+ #ff9ec7（强调粉）</li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

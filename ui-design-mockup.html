@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>记忆助手 · UI 设计方案对比</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+    background: #f2f2f5;
+    color: #2c2c2e;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+  .container { max-width: 1600px; margin: 0 auto; }
+
+  /* —— 标题区 —— */
+  .page-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .page-header .label {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #8e8e93;
+    background: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    color: #1c1c1e;
+  }
+  .page-header .subtitle {
+    font-size: 14px;
+    color: #8e8e93;
+  }
+
+  /* —— 方案卡片横向排布 —— */
+  .scheme-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .scheme-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06);
+  }
+
+  .scheme-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #f2f2f5;
+  }
+  .scheme-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+  }
+  .scheme-title { font-size: 17px; font-weight: 600; }
+  .scheme-desc { font-size: 12px; color: #8e8e93; margin-top: 2px; }
+
+  /* —— 手机外观 —— */
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .phone-frame {
+    position: relative;
+    border-radius: 44px;
+    padding: 12px;
+    background: linear-gradient(145deg, #3a3a3c, #1c1c1e);
+    box-shadow:
+      inset 0 0 0 2px rgba(255,255,255,0.05),
+      0 20px 40px rgba(0,0,0,0.15),
+      0 8px 16px rgba(0,0,0,0.08);
+  }
+  .phone-screen {
+    border-radius: 32px;
+    overflow: hidden;
+    background: #fff;
+    min-height: 640px;
+  }
+  .notch {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 30px;
+    background: #000;
+    border-radius: 15px;
+    z-index: 10;
+  }
+
+  /* —— 状态栏 —— */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 54px 24px 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .status-icons { display: flex; gap: 6px; align-items: center; }
+
+  /* —— 屏幕通用 —— */
+  .screen-body { padding: 0 20px 20px; }
+  .app-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .app-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .app-subtitle { font-size: 12px; color: #8e8e93; margin-top: 4px; }
+  .gear-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  /* —— 方案 A —— */
+  .scheme-a .phone-screen { background: #f6f6f4; }
+  .scheme-a .status-bar { color: #2c2c2e; }
+  .scheme-a .app-title { color: #2c2c2e; }
+  .scheme-a .gear-btn { background: #fff; color: #2c2c2e; border: 1px solid #e5e5e5; }
+
+  .a-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .a-stats {
+    display: flex; gap: 8px;
+    margin-bottom: 14px;
+  }
+  .a-stat-pill {
+    flex: 1;
+    padding: 10px 8px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .a-stat-pill .num { font-size: 18px; font-weight: 600; color: #2c2c2e; }
+  .a-stat-pill .lbl { font-size: 11px; color: #8e8e93; margin-top: 2px; }
+
+  .a-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0;
+  }
+  .a-row:not(:last-child) { border-bottom: 1px solid #f2f2f5; }
+  .a-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #f2f2f5;
+    border: 1px solid #e5e5e5;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    color: #2c2c2e;
+    flex-shrink: 0;
+  }
+  .a-row-content { flex: 1; }
+  .a-row-title { font-size: 14px; font-weight: 500; color: #2c2c2e; }
+  .a-row-sub { font-size: 11px; color: #8e8e93; margin-top: 3px; }
+
+  .a-chip-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .a-chip {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #2c2c2e;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .a-chip .arrow { font-size: 10px; color: #8e8e93; }
+
+  .a-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8e8e93;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 8px 0;
+  }
+
+  /* 底部输入条 */
+  .a-input-bar {
+    position: relative;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 14px 16px;
+    box-shadow: 0 -1px 0 #e5e5e5;
+    display: flex; gap: 10px; align-items: center;
+    margin-top: 8px;
+  }
+  .a-mode-btn {
+    width: 48px; height: 44px;
+    background: #f2f2f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px;
+  }
+  .a-mode-btn .icon { font-size: 13px; }
+  .a-mode-btn .txt { font-size: 9px; font-weight: 600; color: #2c2c2e; }
+  .a-input {
+    flex: 1;
+    background: #f2f2f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    height: 44px;
+    padding: 0 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: #8e8e93;
+  }
+  .a-input .mic { color: #2c2c2e; font-size: 12px; }
+  .a-ask-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #2c2c2e;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  /* 空状态 */
+  .a-empty {
+    text-align: center;
+    padding: 50px 0 30px;
+  }
+  .a-empty-circle {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: #f2f2f5;
+    border: 1px solid #e5e5e5;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 32px; color: #8e8e93;
+    margin-bottom: 16px;
+  }
+  .a-empty .title { font-size: 16px; font-weight: 600; color: #2c2c2e; }
+  .a-empty .desc { font-size: 12px; color: #8e8e93; margin-top: 6px; line-height: 1.5; padding: 0 30px; }
+
+  /* 搜索框 */
+  .a-search {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: #8e8e93;
+    margin-bottom: 12px;
+  }
+
+  /* 筛选 chip */
+  .a-filter-row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .a-filter {
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    color: #8e8e93;
+  }
+  .a-filter.active {
+    background: #2c2c2e;
+    color: #fff;
+    border-color: #2c2c2e;
+  }
+
+  /* —— 方案 B —— */
+  .scheme-b .phone-screen { background: #fff5e8; }
+  .scheme-b .status-bar { color: #3c281c; }
+  .scheme-b .app-title { color: #3c281c; }
+  .scheme-b .gear-btn { background: #ffe4c4; color: #8b4513; }
+
+  .b-card {
+    background: #fffaf0;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05), 0 4px 16px rgba(139, 69, 19, 0.04);
+  }
+
+  .b-donut {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .b-donut-ring {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: conic-gradient(#cc7a2a 0 60%, #e6a862 60% 80%, #f2d4b5 80% 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .b-donut-ring::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    background: #fffaf0;
+    border-radius: 50%;
+  }
+  .b-donut-label { font-size: 11px; color: #8b4513; margin-bottom: 6px; font-weight: 500; }
+  .b-legend-row { display: flex; gap: 10px; }
+  .b-legend {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 10px; color: #8b4513;
+  }
+  .b-legend-dot { width: 5px; height: 5px; border-radius: 50%; background: #cc7a2a; }
+  .b-legend-dot.l2 { background: #e6a862; }
+  .b-legend-dot.l3 { background: #f2d4b5; }
+
+  .b-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 0;
+  }
+  .b-row:not(:last-child) { border-bottom: 1px solid #ffe4c4; }
+  .b-icon {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: #ffe4c4;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: #8b4513;
+    flex-shrink: 0;
+  }
+  .b-icon.schedule { background: #ffe0b8; color: #cc7a2a; }
+  .b-icon.note { background: #ffecdb; color: #a0522d; }
+  .b-row-title { font-size: 14px; font-weight: 500; color: #3c281c; }
+  .b-row-sub { font-size: 11px; color: #a0522d; margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+
+  .b-chip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .b-chip {
+    background: #fffaf0;
+    border-radius: 12px;
+    padding: 11px 12px;
+    font-size: 12px; color: #3c281c;
+    display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 1px 3px rgba(139, 69, 19, 0.04);
+  }
+  .b-chip .arrow { font-size: 10px; color: #cc7a2a; }
+
+  .b-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8b4513;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 10px 0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .b-section-title .more { font-size: 10px; color: #cc7a2a; letter-spacing: 0; text-transform: none; }
+
+  .b-input-bar {
+    background: linear-gradient(to bottom, #fffaf0, #ffe4c4);
+    border-radius: 20px 20px 0 0;
+    padding: 14px 16px;
+    display: flex; gap: 10px; align-items: center;
+    margin-top: 8px;
+  }
+  .b-mode-btn {
+    width: 48px; height: 44px;
+    background: #ffe4c4;
+    border-radius: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px;
+  }
+  .b-mode-btn .icon { font-size: 13px; color: #8b4513; }
+  .b-mode-btn .txt { font-size: 9px; font-weight: 600; color: #8b4513; }
+  .b-input {
+    flex: 1;
+    background: #fffaf0;
+    border-radius: 12px;
+    height: 44px;
+    padding: 0 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: #8b4513;
+    box-shadow: 0 1px 3px rgba(139, 69, 19, 0.08);
+  }
+  .b-input .mic { color: #cc7a2a; font-size: 12px; }
+  .b-ask-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #cc7a2a, #8b4513);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+  }
+
+  .b-empty { text-align: center; padding: 40px 0 24px; }
+  .b-empty-circle {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffe4c4, #ffd4a3);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 32px; color: #8b4513;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.15);
+  }
+  .b-empty .title { font-size: 16px; font-weight: 600; color: #3c281c; }
+  .b-empty .desc { font-size: 12px; color: #a0522d; margin-top: 6px; line-height: 1.5; padding: 0 30px; }
+
+  .b-search {
+    background: #fffaf0;
+    border-radius: 14px;
+    padding: 13px 16px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: #8b4513;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(139, 69, 19, 0.04);
+  }
+  .b-filter-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .b-filter {
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    background: #fffaf0;
+    color: #8b4513;
+  }
+  .b-filter.active {
+    background: linear-gradient(135deg, #cc7a2a, #8b4513);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
+  }
+
+  /* —— 方案 C —— */
+  .scheme-c .phone-screen {
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);
+  }
+  .scheme-c .status-bar { color: #e8e8f0; }
+  .scheme-c .app-title { color: #fff; }
+  .scheme-c .gear-btn {
+    background: rgba(255,255,255,0.08);
+    color: #9f9fb0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .c-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+
+  .c-donut {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .c-donut-ring {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: conic-gradient(#6dd5fa 0 60%, #ff9ec7 60% 80%, rgba(255,255,255,0.1) 80% 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(109, 213, 250, 0.3);
+  }
+  .c-donut-ring::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    background: #1a1a2e;
+    border-radius: 50%;
+  }
+  .c-donut-label { font-size: 11px; color: #9f9fb0; margin-bottom: 6px; font-weight: 500; }
+  .c-legend-row { display: flex; gap: 10px; }
+  .c-legend { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #e8e8f0; }
+  .c-legend-dot { width: 5px; height: 5px; border-radius: 50%; background: #6dd5fa; box-shadow: 0 0 8px #6dd5fa; }
+  .c-legend-dot.l2 { background: #ff9ec7; box-shadow: 0 0 8px #ff9ec7; }
+  .c-legend-dot.l3 { background: rgba(255,255,255,0.2); box-shadow: none; }
+
+  .c-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+  .c-row:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .c-icon {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(109, 213, 250, 0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: #6dd5fa;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(109, 213, 250, 0.2);
+  }
+  .c-icon.schedule { background: rgba(255, 158, 199, 0.15); color: #ff9ec7; box-shadow: 0 0 12px rgba(255, 158, 199, 0.2); }
+  .c-icon.note { background: rgba(180, 180, 220, 0.15); color: #c4b9d8; }
+  .c-row-title { font-size: 14px; font-weight: 500; color: #e8e8f0; }
+  .c-row-sub { font-size: 11px; color: #9f9fb0; margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+
+  .c-chip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .c-chip {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 11px 12px;
+    font-size: 12px; color: #e8e8f0;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .c-chip .arrow { font-size: 10px; color: #6dd5fa; }
+
+  .c-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #9f9fb0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 10px 0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .c-section-title .more { font-size: 10px; color: #6dd5fa; letter-spacing: 0; text-transform: none; }
+
+  .c-input-bar {
+    background: linear-gradient(to bottom, rgba(26,26,46,0.9), #0f0f1a);
+    border-radius: 20px 20px 0 0;
+    padding: 14px 16px;
+    display: flex; gap: 10px; align-items: center;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .c-mode-btn {
+    width: 48px; height: 44px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px;
+  }
+  .c-mode-btn .icon { font-size: 13px; color: #6dd5fa; }
+  .c-mode-btn .txt { font-size: 9px; font-weight: 600; color: #6dd5fa; }
+  .c-input {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    height: 44px;
+    padding: 0 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: #9f9fb0;
+  }
+  .c-input .mic { color: #6dd5fa; font-size: 12px; }
+  .c-ask-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6dd5fa, #2980b9);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 4px 16px rgba(109, 213, 250, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  .c-empty { text-align: center; padding: 40px 0 24px; }
+  .c-empty-circle {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(109, 213, 250, 0.2), rgba(255, 158, 199, 0.15));
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 32px; color: #6dd5fa;
+    margin-bottom: 16px;
+    border: 1px solid rgba(109, 213, 250, 0.3);
+    box-shadow: 0 0 40px rgba(109, 213, 250, 0.2), inset 0 0 20px rgba(109, 213, 250, 0.1);
+  }
+  .c-empty .title { font-size: 16px; font-weight: 600; color: #e8e8f0; }
+  .c-empty .desc { font-size: 12px; color: #9f9fb0; margin-top: 6px; line-height: 1.5; padding: 0 30px; }
+
+  .c-search {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 13px 16px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: #9f9fb0;
+    margin-bottom: 14px;
+  }
+  .c-filter-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .c-filter {
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    background: rgba(255,255,255,0.05);
+    color: #9f9fb0;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .c-filter.active {
+    background: linear-gradient(135deg, #6dd5fa, #2980b9);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 2px 12px rgba(109, 213, 250, 0.3);
+  }
+
+  /* —— Tab 切换 —— */
+  .phone-tabs {
+    display: flex;
+    background: rgba(0,0,0,0.02);
+    border-radius: 10px;
+    padding: 3px;
+    margin: 0 0 14px;
+  }
+  .scheme-c .phone-tabs { background: rgba(255,255,255,0.04); }
+  .phone-tab {
+    flex: 1;
+    padding: 7px 8px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .scheme-a .phone-tab { color: #8e8e93; }
+  .scheme-a .phone-tab.active { background: #2c2c2e; color: #fff; }
+  .scheme-b .phone-tab { color: #a0522d; }
+  .scheme-b .phone-tab.active { background: linear-gradient(135deg, #cc7a2a, #8b4513); color: #fff; }
+  .scheme-c .phone-tab { color: #9f9fb0; }
+  .scheme-c .phone-tab.active { background: linear-gradient(135deg, #6dd5fa, #2980b9); color: #fff; box-shadow: 0 2px 8px rgba(109,213,250,0.3); }
+
+  /* —— 对比说明 —— */
+  .compare-section {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  }
+  .compare-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: -0.3px;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .compare-table th {
+    text-align: left;
+    padding: 14px 12px;
+    background: #f6f6f8;
+    font-weight: 600;
+    color: #2c2c2e;
+    border-bottom: 1px solid #e5e5ea;
+    font-size: 12px;
+  }
+  .compare-table th:first-child {
+    border-radius: 10px 0 0 10px;
+    width: 20%;
+  }
+  .compare-table th:last-child { border-radius: 0 10px 10px 0; }
+  .compare-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #f2f2f5;
+    color: #3c3c43;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .compare-table td:first-child { font-weight: 600; color: #2c2c2e; }
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  /* 颜色样例 */
+  .color-swatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .color-dot {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.1);
+    display: inline-block;
+  }
+  .scheme-a-color { background: #2c2c2e; }
+  .scheme-b-color { background: #cc7a2a; }
+  .scheme-c-color { background: #6dd5fa; }
+
+  /* 评分 */
+  .score-dots { display: inline-flex; gap: 3px; }
+  .score-dot { width: 12px; height: 12px; border-radius: 50%; background: #e5e5ea; }
+  .score-dot.filled.a { background: #2c2c2e; }
+  .score-dot.filled.b { background: linear-gradient(135deg, #cc7a2a, #8b4513); }
+  .score-dot.filled.c { background: linear-gradient(135deg, #6dd5fa, #2980b9); box-shadow: 0 0 6px rgba(109,213,250,0.4); }
+
+  /* 推荐标记 */
+  .recommend-mark {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 3px 10px;
+    background: linear-gradient(135deg, #cc7a2a, #8b4513);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    vertical-align: middle;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    color: #8e8e93;
+    font-size: 12px;
+    padding: 20px 0;
+  }
+
+  /* 方案卡片底部说明 */
+  .scheme-footer {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid #f2f2f5;
+    font-size: 12px;
+    color: #8e8e93;
+    line-height: 1.6;
+  }
+  .scheme-footer .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  .tag-a { background: #f2f2f5; color: #2c2c2e; }
+  .tag-b { background: #ffe4c4; color: #8b4513; }
+  .tag-c { background: rgba(109, 213, 250, 0.15); color: #2980b9; }
+
+  @media (max-width: 1200px) {
+    .scheme-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 标题 -->
+  <div class="page-header">
+    <span class="label">UI DESIGN · v1.0</span>
+    <h1>记忆助手 · 三套视觉方案对比</h1>
+    <div class="subtitle">Memory Assistant · Minimal / Warm / Glass</div>
+  </div>
+
+  <!-- 三方案并排 -->
+  <div class="scheme-row">
+
+    <!-- ========= 方案 A ========= -->
+    <div class="scheme-card scheme-a">
+      <div class="scheme-header">
+        <div class="scheme-badge" style="background:#2c2c2e">A</div>
+        <div>
+          <div class="scheme-title">极简白灰</div>
+          <div class="scheme-desc">Minimal · MUJI 风 · 克制留白</div>
+        </div>
+      </div>
+
+      <div class="phone-wrap">
+
+        <!-- 手机:首页 -->
+        <div class="phone-frame">
+          <div class="notch"></div>
+          <div class="phone-screen">
+            <div class="status-bar">
+              <span>9:41</span>
+              <div class="status-icons">
+                <span>●●●●</span>
+                <span>📶</span>
+                <span>🔋</span>
+              </div>
+            </div>
+            <div class="screen-body">
+              <div class="app-title-row">
+                <div>
+                  <div class="app-title">记忆助手</div>
+                  <div class="app-subtitle">3 条记录 · 1 项待办</div>
+                </div>
+                <div class="gear-btn">⚙</div>
+              </div>
+
+              <!-- 记忆图谱 -->
+              <div class="a-card" style="padding: 14px;">
+                <div style="display:flex; align-items:center; gap: 14px;">
+                  <div style="width:56px; height:56px; border-radius:50%; background: conic-gradient(#2c2c2e 0 60%, #8e8e93 60% 80%, #e5e5e5 80% 100%); position:relative; flex-shrink: 0; display:flex; align-items:center; justify-content:center;">
+                    <div style="position:absolute; inset:8px; background:#fff; border-radius:50%;"></div>
+                  </div>
+                  <div style="flex:1;">
+                    <div style="font-size:11px; color:#8e8e93; margin-bottom:6px; font-weight:500;">记忆图谱</div>
+                    <div style="display:flex; flex-direction:column; gap:5px;">
+                      <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:#2c2c2e;">
+                        <span style="width:5px; height:5px; border-radius:50%; background:#2c2c2e; display:inline-block;"></span>
+                        <span>位置 3</span>
+                        <span style="margin-left:8px; color:#8e8e93;">● 日程 1</span>
+                        <span style="margin-left:8px; color:#8e8e93;">○ 备忘 1</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="a-section-title">最近更新</div>
+
+              <div class="a-card">
+                <div class="a-row">
+                  <div class="a-icon">📍</div>
+                  <div class="a-row-content">
+                    <div class="a-row-title">西瓜</div>
+                    <div class="a-row-sub">冰箱冷藏 · 2 小时前</div>
+                  </div>
+                </div>
+                <div class="a-row">
+                  <div class="a-icon">📅</div>
+                  <div class="a-row-content">
+                    <div class="a-row-title">周五交季度报告</div>
+                    <div class="a-row-sub">会议室 B · 6 月 20 日</div>
+                  </div>
+                </div>
+                <div class="a-row">
+                  <div class="a-icon">📝</div>
+                  <div class="a-row-content">
+                    <div class="a-row-title">生日收到的书</div>
+                    <div class="a-row-sub">书架第二层 · 3 天前</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="a-section-title">快捷记录</div>
+              <div class="a-chip-grid">
+                <div class="a-chip"><span class="arrow">↗</span><span>西瓜放冰箱</span></div>
+                <div class="a-chip"><span class="arrow">↗</span><span>钥匙在玄关</span></div>
+                <div class="a-chip"><span class="arrow">↗</span><span>周五交报告</span></div>
+                <div class="a-chip"><span class="arrow">↗</span><span>洗衣液在阳台</span></div>
+              </div>
+            </div>
+            <!-- 输入条 -->
+            <div class="a-input-bar">
+              <div class="a-mode-btn">
+                <span class="icon">+</span>
+                <span class="txt">记下</span>
+              </div>
+              <div class="a-input">
+                <span>记下内容，长按语音输入</span>
+                <span class="mic">🎤</span>
+              </div>
+              <div class="a-ask-btn">✦</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scheme-footer">
+          <span class="tag tag-a">MUJI 风格</span>
+          <span class="tag tag-a">信息优先</span>
+          <span class="tag tag-a">零色彩干扰</span>
+          <div style="margin-top: 8px; font-size: 12px; line-height: 1.6; color: #8e8e93;">
+            克制的米白底 + 纯灰深色调，细线描边 + 极小阴影，让内容成为视觉焦点。适合喜欢 Things / Notion 工具感的用户。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========= 方案 B ========= -->
+    <div class="scheme-card scheme-b">
+      <div class="scheme-header">
+        <div class="scheme-badge" style="background:linear-gradient(135deg,#cc7a2a,#8b4513)">B</div>
+        <div>
+          <div class="scheme-title">温暖生活 <span class="recommend-mark">推荐</span></div>
+          <div class="scheme-desc">Warm · 奶油米白 + 暖橙点缀</div>
+        </div>
+      </div>
+
+      <div class="phone-wrap">
+
+        <!-- 手机:首页 -->
+        <div class="phone-frame">
+          <div class="notch"></div>
+          <div class="phone-screen">
+            <div class="status-bar">
+              <span>9:41</span>
+              <div class="status-icons">
+                <span>●●●●</span>
+                <span>📶</span>
+                <span>🔋</span>
+              </div>
+            </div>
+            <div class="screen-body">
+              <div class="app-title-row">
+                <div>
+                  <div class="app-title">记忆助手</div>
+                  <div class="app-subtitle">3 条记录 · 1 项待办</div>
+                </div>
+                <div class="gear-btn">⚙</div>
+              </div>
+
+              <!-- 记忆图谱 -->
+              <div class="b-card">
+                <div class="b-donut">
+                  <div class="b-donut-ring"></div>
+                  <div style="flex:1;">
+                    <div class="b-donut-label">记忆图谱</div>
+                    <div class="b-legend-row">
+                      <div class="b-legend"><span class="b-legend-dot"></span><span>位置 3</span></div>
+                      <div class="b-legend"><span class="b-legend-dot l2"></span><span>日程 1</span></div>
+                      <div class="b-legend"><span class="b-legend-dot l3"></span><span>备忘 1</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="b-section-title"><span>最近更新</span><span class="more">查看全部 →</span></div>
+
+              <div class="b-card" style="padding: 6px 16px;">
+                <div class="b-row">
+                  <div class="b-icon">📍</div>
+                  <div class="a-row-content" style="flex:1;">
+                    <div class="b-row-title">西瓜</div>
+                    <div class="b-row-sub"><span>📍</span><span>冰箱冷藏 · 2 小时前</span></div>
+                  </div>
+                </div>
+                <div class="b-row">
+                  <div class="b-icon schedule">📅</div>
+                  <div style="flex:1;">
+                    <div class="b-row-title">周五交季度报告</div>
+                    <div class="b-row-sub"><span>📍</span><span>会议室 B · 6 月 20 日</span></div>
+                  </div>
+                </div>
+                <div class="b-row">
+                  <div class="b-icon note">📝</div>
+                  <div style="flex:1;">
+                    <div class="b-row-title">生日收到的书</div>
+                    <div class="b-row-sub"><span>📍</span><span>书架第二层 · 3 天前</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="b-section-title"><span>快捷记录</span></div>
+              <div class="b-chip-grid">
+                <div class="b-chip"><span class="arrow">↗</span><span>西瓜放冰箱</span></div>
+                <div class="b-chip"><span class="arrow">↗</span><span>钥匙在玄关</span></div>
+                <div class="b-chip"><span class="arrow">↗</span><span>周五交报告</span></div>
+                <div class="b-chip"><span class="arrow">↗</span><span>洗衣液在阳台</span></div>
+              </div>
+            </div>
+            <!-- 输入条 -->
+            <div class="b-input-bar">
+              <div class="b-mode-btn">
+                <span class="icon">+</span>
+                <span class="txt">记下</span>
+              </div>
+              <div class="b-input">
+                <span>记下内容，长按语音输入</span>
+                <span class="mic">🎤</span>
+              </div>
+              <div class="b-ask-btn">✦</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scheme-footer">
+          <span class="tag tag-b">生活日记</span>
+          <span class="tag tag-b">温暖手账</span>
+          <span class="tag tag-b">柔和阴影</span>
+          <div style="margin-top: 8px; font-size: 12px; line-height: 1.6; color: #8b4513;">
+            奶油米白为底 + 暖橙主色，圆角大、阴影柔，给人翻写手账本的亲切感。日常记物最自然，iOS 原生体验无缝衔接。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========= 方案 C ========= -->
+    <div class="scheme-card scheme-c">
+      <div class="scheme-header">
+        <div class="scheme-badge" style="background:linear-gradient(135deg,#6dd5fa,#2980b9)">C</div>
+        <div>
+          <div class="scheme-title">玻璃科技</div>
+          <div class="scheme-desc">Glass · 深色毛玻璃 + 霓虹高光</div>
+        </div>
+      </div>
+
+      <div class="phone-wrap">
+
+        <!-- 手机:首页 -->
+        <div class="phone-frame">
+          <div class="notch"></div>
+          <div class="phone-screen">
+            <div class="status-bar">
+              <span>9:41</span>
+              <div class="status-icons">
+                <span>●●●●</span>
+                <span>📶</span>
+                <span>🔋</span>
+              </div>
+            </div>
+            <div class="screen-body">
+              <div class="app-title-row">
+                <div>
+                  <div class="app-title">记忆助手</div>
+                  <div class="app-subtitle" style="color: #9f9fb0;">3 条记录 · 1 项待办</div>
+                </div>
+                <div class="gear-btn">⚙</div>
+              </div>
+
+              <!-- 记忆图谱 -->
+              <div class="c-card">
+                <div class="c-donut">
+                  <div class="c-donut-ring"></div>
+                  <div style="flex:1;">
+                    <div class="c-donut-label">记忆图谱</div>
+                    <div class="c-legend-row">
+                      <div class="c-legend"><span class="c-legend-dot"></span><span>位置 3</span></div>
+                      <div class="c-legend"><span class="c-legend-dot l2"></span><span>日程 1</span></div>
+                      <div class="c-legend"><span class="c-legend-dot l3"></span><span>备忘 1</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="c-section-title"><span>最近更新</span><span class="more">查看全部 →</span></div>
+
+              <div class="c-card" style="padding: 6px 16px;">
+                <div class="c-row">
+                  <div class="c-icon">📍</div>
+                  <div style="flex:1;">
+                    <div class="c-row-title">西瓜</div>
+                    <div class="c-row-sub"><span>📍</span><span>冰箱冷藏 · 2 小时前</span></div>
+                  </div>
+                </div>
+                <div class="c-row">
+                  <div class="c-icon schedule">📅</div>
+                  <div style="flex:1;">
+                    <div class="c-row-title">周五交季度报告</div>
+                    <div class="c-row-sub"><span>📍</span><span>会议室 B · 6 月 20 日</span></div>
+                  </div>
+                </div>
+                <div class="c-row">
+                  <div class="c-icon note">📝</div>
+                  <div style="flex:1;">
+                    <div class="c-row-title">生日收到的书</div>
+                    <div class="c-row-sub"><span>📍</span><span>书架第二层 · 3 天前</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="c-section-title"><span>快捷记录</span></div>
+              <div class="c-chip-grid">
+                <div class="c-chip"><span class="arrow">↗</span><span>西瓜放冰箱</span></div>
+                <div class="c-chip"><span class="arrow">↗</span><span>钥匙在玄关</span></div>
+                <div class="c-chip"><span class="arrow">↗</span><span>周五交报告</span></div>
+                <div class="c-chip"><span class="arrow">↗</span><span>洗衣液在阳台</span></div>
+              </div>
+            </div>
+            <!-- 输入条 -->
+            <div class="c-input-bar">
+              <div class="c-mode-btn">
+                <span class="icon">+</span>
+                <span class="txt">记下</span>
+              </div>
+              <div class="c-input">
+                <span>记下内容，长按语音输入</span>
+                <span class="mic">🎤</span>
+              </div>
+              <div class="c-ask-btn">✦</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scheme-footer">
+          <span class="tag tag-c">现代科技</span>
+          <span class="tag tag-c">毛玻璃</span>
+          <span class="tag tag-c">霓虹发光</span>
+          <div style="margin-top: 8px; font-size: 12px; line-height: 1.6; color: #6b6b80;">
+            深蓝紫黑色底 + 青色霓虹主色，毛玻璃卡片 + 发光阴影，夜间使用最舒服，给人"AI 助手"的未来感。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 详细对比 ============ -->
+  <div class="compare-section">
+    <h2>三方案详细规格对比</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th><span class="color-swatch"><span class="color-dot scheme-a-color"></span>方案 A · 极简白灰</span></th>
+          <th><span class="color-swatch"><span class="color-dot scheme-b-color"></span>方案 B · 温暖生活</span> <span class="recommend-mark">推荐</span></th>
+          <th><span class="color-swatch"><span class="color-dot scheme-c-color"></span>方案 C · 玻璃科技</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>核心色彩</td>
+          <td>
+            主色 <span class="color-swatch"><span class="color-dot" style="background:#2c2c2e"></span>#2c2c2e</span><br>
+            背景 <span class="color-swatch"><span class="color-dot" style="background:#f6f6f4"></span>#f6f6f4</span><br>
+            辅色 <span class="color-swatch"><span class="color-dot" style="background:#8e8e93"></span>#8e8e93</span>
+          </td>
+          <td>
+            主色 <span class="color-swatch"><span class="color-dot" style="background:#cc7a2a"></span>#cc7a2a</span><br>
+            背景 <span class="color-swatch"><span class="color-dot" style="background:#fff5e8"></span>#fff5e8</span><br>
+            辅色 <span class="color-swatch"><span class="color-dot" style="background:#e6a862"></span>#e6a862</span>
+          </td>
+          <td>
+            主色 <span class="color-swatch"><span class="color-dot" style="background:#6dd5fa"></span>#6dd5fa</span><br>
+            背景 <span class="color-swatch"><span class="color-dot" style="background:#1a1a2e"></span>#1a1a2e</span><br>
+            辅色 <span class="color-swatch"><span class="color-dot" style="background:#ff9ec7"></span>#ff9ec7</span>
+          </td>
+        </tr>
+        <tr>
+          <td>卡片样式</td>
+          <td>细线描边 (0.5px) + 无阴影 / 极淡阴影</td>
+          <td>奶油表面 + 柔和多层阴影 (y 2-6, radius 8-16)</td>
+          <td>毛玻璃 (opacity 0.06) + 细边框 + 深阴影</td>
+        </tr>
+        <tr>
+          <td>圆角半径</td>
+          <td>卡片 14px · 按钮 10-12px · 克制但现代</td>
+          <td>卡片 16px · 按钮 12px · 温和圆润</td>
+          <td>卡片 16px · 按钮 12px · 现代大气</td>
+        </tr>
+        <tr>
+          <td>图标风格</td>
+          <td>圆形灰底 + 深色线条图标</td>
+          <td>暖色填充圆 + 暖色图标 · 有温度</td>
+          <td>深色半透明圆 + 霓虹色图标 · 含发光</td>
+        </tr>
+        <tr>
+          <td>文字层级</td>
+          <td>3 级 (深灰 / 灰 / 浅灰)</td>
+          <td>3 级 (深棕 / 橙棕 / 浅橙)</td>
+          <td>3 级 (近白 / 9f9fb0 / 7f7f95)</td>
+        </tr>
+        <tr>
+          <td>空状态感受</td>
+          <td>简洁引导 · 不喧宾夺主</td>
+          <td>温暖鼓励 · 像朋友提醒你记录</td>
+          <td>神秘科技感 · 鼓励探索</td>
+        </tr>
+        <tr>
+          <td>底部输入条</td>
+          <td>纯白背景 + 灰色输入框</td>
+          <td>暖色渐变底 + 米白输入框 + 发光按钮</td>
+          <td>深色玻璃底 + 霓虹发光按钮</td>
+        </tr>
+        <tr>
+          <td>白天户外可读性</td>
+          <td>⭐⭐⭐⭐⭐ 最佳</td>
+          <td>⭐⭐⭐⭐ 良好</td>
+          <td>⭐⭐ 一般（深色反光）</td>
+        </tr>
+        <tr>
+          <td>夜间使用体验</td>
+          <td>⭐⭐⭐ 普通（亮色刺眼）</td>
+          <td>⭐⭐⭐⭐ 暖色调不刺眼</td>
+          <td>⭐⭐⭐⭐⭐ 最佳</td>
+        </tr>
+        <tr>
+          <td>"记忆助手"契合度</td>
+          <td>⭐⭐⭐ 工具感强</td>
+          <td>⭐⭐⭐⭐⭐ 生活记录感最契合</td>
+          <td>⭐⭐⭐ 科技感略重</td>
+        </tr>
+        <tr>
+          <td>与 iOS 原生体验</td>
+          <td>⭐⭐⭐⭐ 与系统风格接近</td>
+          <td>⭐⭐⭐⭐ 有个性但不冲突</td>
+          <td>⭐⭐⭐ 需要深色模式支持</td>
+        </tr>
+        <tr>
+          <td>落地难度</td>
+          <td>⭐⭐⭐⭐⭐ 最简单 · 几乎不需要自定义</td>
+          <td>⭐⭐⭐⭐ 中等 · 需要统一色板</td>
+          <td>⭐⭐ 需要毛玻璃 + 发光效果处理</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============ 第二页：空状态 & 全部记录 ============ -->
+  <div class="compare-section">
+    <h2>空状态对比 · 首次进入时引导</h2>
+    <div class="scheme-row" style="margin-bottom: 0;">
+
+      <!-- A 空状态 -->
+      <div class="scheme-card scheme-a">
+        <div class="scheme-header" style="padding-bottom:14px; margin-bottom:14px;">
+          <div class="scheme-badge" style="background:#2c2c2e; width:32px; height:32px; font-size:12px;">A</div>
+          <div><div class="scheme-title" style="font-size:15px;">极简白灰</div></div>
+        </div>
+        <div class="phone-frame">
+          <div class="notch"></div>
+          <div class="phone-screen" style="min-height: 500px;">
+            <div class="status-bar">
+              <span>9:41</span>
+              <div class="status-icons">
+                <span>●●●●</span><span>📶</span><span>🔋</span>
+              </div>
+            </div>
+            <div class="screen-body">
+              <div class="app-title-row">
+                <div>
+                  <div class="app-title">记忆助手</div>
+                  <div class="app-subtitle">还没有任何记录</div>
+                </div>
+                <div class="gear-btn">⚙</div>
+              </div>
+              <div class="a-empty">
+                <div class="a-empty-circle">✎</div>
+                <div class="title">从一件小事开始</div>
+                <div class="desc">点击下方示例快速记录，或长按输入框用语音说出来</div>
+              </div>
+              <div class="a-section-title">试试这样记</div>
+              <div class="a-chip-grid">
+                <div class="a-chip"><span class="arrow">↗</span><span>西瓜放冰箱</span></div>
+                <div class="a-chip"><span class="arrow">↗</span><span>钥匙在玄关</span></div>
+                <div class="a-chip"><span class="arrow">↗</span><span>周五交报告</span></div>
+                <div class="a-chip"><span class="arrow">↗</span><span>洗衣液在阳台</span></div>
+              </div>
+              <div class="a-input-bar">
+                <div class="a-mode-btn"><span class="icon">+</span><span class="txt">记下</span></div>
+                <div class="a-input"><span>记下内容，长按语音输入</span><span class="mic">🎤</span></div>
+                <div class="a-ask-btn">✦</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- B 空状态 -->
+      <div class="scheme-card scheme-b">
+        <div class="scheme-header" style="padding-bottom:14px; margin-bottom:14px;">
+          <div class="scheme-badge" style="background:linear-gradient(135deg,#cc7a2a,#8b4513); width:32px; height:32px; font-size:12px;">B</div>
+          <div><div class="scheme-title" style="font-size:15px;">温暖生活 <span class="recommend-mark">推荐</span></div></div>
+        </div>
+        <div class="phone-frame">
+          <div class="notch"></div>
+          <div class="phone-screen" style="min-height: 500px;">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><span>●●●●</span><span>📶</span><span>🔋</span></div></div>
+            <div class="screen-body">
+              <div class="app-title-row">
+                <div><div class="app-title">记忆助手</div><div class="app-subtitle">还没有任何记录</div></div>
+                <div class="gear-btn">⚙</div>
+              </div>
+              <div class="b-empty">
+                <div class="b-empty-circle">✎</div>
+                <div class="title">从一件小事开始</div>
+                <div class="desc">让记录变成日常的小动作，你会惊讶于它带来的帮助</div>
+              </div>
+              <div class="b-section-title"><span>试试这样记</span></div>
+              <div class="b-chip-grid">
+                <div class="b-chip"><span class="arrow">↗</span><span>西瓜放冰箱</span></div>
+                <div class="b-chip"><span class="arrow">↗</span><span>钥匙在玄关</span></div>
+                <div class="b-chip"><span class="arrow">↗</span><span>周五交报告</span></div>
+                <div class="b-chip"><span class="arrow">↗</span><span>洗衣液在阳台</span></div>
+              </div>
+              <div class="b-input-bar">
+                <div class="b-mode-btn"><span class="icon">+</span><span class="txt">记下</span></div>
+                <div class="b-input"><span>记下内容，长按语音输入</span><span class="mic">🎤</span></div>
+                <div class="b-ask-btn">✦</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C 空状态 -->
+      <div class="scheme-card scheme-c">
+        <div class="scheme-header" style="padding-bottom:14px; margin-bottom:14px;">
+          <div class="scheme-badge" style="background:linear-gradient(135deg,#6dd5fa,#2980b9); width:32px; height:32px; font-size:12px;">C</div>
+          <div><div class="scheme-title" style="font-size:15px;">玻璃科技</div></div>
+        </div>
+        <div class="phone-frame">
+          <div class="notch"></div>
+          <div class="phone-screen" style="min-height: 500px;">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><span>●●●●</span><span>📶</span><span>🔋</span></div></div>
+            <div class="screen-body">
+              <div class="app-title-row">
+                <div><div class="app-title">记忆助手</div><div class="app-subtitle" style="color:#9f9fb0">3 条记录 · 1 项待办</div></div>
+                <div class="gear-btn">⚙</div>
+              </div>
+              <div class="c-empty">
+                <div class="c-empty-circle">✎</div>
+                <div class="title">开始你的第一条记忆</div>
+                <div class="desc">长按下方麦克风说出你要记录的事，或直接点击下方示例</div>
+              </div>
+              <div class="c-section-title"><span>试试这样记</span></div>
+              <div class="c-chip-grid">
+                <div class="c-chip"><span class="arrow">↗</span><span>西瓜放冰箱</span></div>
+                <div class="c-chip"><span class="arrow">↗</span><span>钥匙在玄关</span></div>
+                <div class="c-chip"><span class="arrow">↗</span><span>周五交报告</span></div>
+                <div class="c-chip"><span class="arrow">↗</span><span>洗衣液在阳台</span></div>
+              </div>
+              <div class="c-input-bar">
+                <div class="c-mode-btn"><span class="icon">+</span><span class="txt">记下</span></div>
+                <div class="c-input"><span>记下内容，长按语音输入</span><span class="mic">🎤</span></div>
+                <div class="c-ask-btn">✦</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>记忆助手 · UI 设计方案 A / B / C · 请告诉我你倾向的风格，我再做细化</div>
+  </div>
+</div>
+
+</body>
+</html>
