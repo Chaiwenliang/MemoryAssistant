@@ -19,54 +19,37 @@
 
 ## 📱 界面预览
 
-### 🧠 AI 智能问答
+<div align="center">
 
-| 首页对话界面 |
-|:---:|
-| ![首页智能问答](workspace/screenshots/01-home.png) |
-| 用自然语言提问，AI 从记忆库中智能检索答案 |
+| 🧠 AI 智能问答 | 📝 全部记录 | 🔍 记录详情 |
+|:---:|:---:|:---:|
+| <img src="workspace/screenshots/01-home.png" width="200"> | <img src="workspace/screenshots/04-records.png" width="200"> | <img src="workspace/screenshots/05-record-detail.png" width="200"> |
+| 首页对话界面 | 记录列表 | 记录详情 |
 
-### 📝 记录管理
+| ➕ 新增记录 | 🎙️ 语音录入 | ⚙️ 设置中心 |
+|:---:|:---:|:---:|
+| <img src="workspace/screenshots/06-record-form.png" width="200"> | <img src="workspace/screenshots/07-quick-capture.png" width="200"> | <img src="workspace/screenshots/02-settings.png" width="200"> |
+| 三类记忆快速录入 | 长按说话自动识别 | 主题与数据管理 |
 
-| 全部记录列表 | 记录详情页 |
+| 🤖 AI 管理控制台 | 💎 Pro 会员 |
 |:---:|:---:|
-| ![全部记录](workspace/screenshots/04-records.png) | ![记录详情](workspace/screenshots/05-record-detail.png) |
-| 分类浏览所有记忆，支持搜索和排序 | 查看完整信息，一键编辑或删除 |
+| <img src="workspace/screenshots/03-admin.png" width="200"> | <img src="workspace/screenshots/08-upgrade.png" width="200"> |
+| 用量统计与日志 | 解锁更多额度 |
 
-| 新增记录表单 |
-|:---:|
-| ![新增记录](workspace/screenshots/06-record-form.png) |
-| 支持三种类型：位置记忆 / 日程提醒 / 通用备忘 |
-
-### 🎙️ 语音输入
-
-| 快速语音录入 |
-|:---:|
-| ![快速记录](workspace/screenshots/07-quick-capture.png) |
-| 长按说话，自动语音识别并智能分类保存 |
-
-### ⚙️ 设置中心
-
-| 设置页面 |
-|:---:|
-| ![设置中心](workspace/screenshots/02-settings.png) |
-| 主题切换、数据管理、AI 配置、关于等 |
-
-### 🤖 AI 用量管理
-
-| AI 管理控制台 | Pro 会员升级 |
-|:---:|:---:|
-| ![管理控制台](workspace/screenshots/03-admin.png) | ![升级页](workspace/screenshots/08-upgrade.png) |
-| 调用统计、请求日志、数据导出 | 解锁 200 次/天 AI 调用额度 |
+</div>
 
 ### 🎨 多主题支持
 
-| 玻璃主题（暗色） | 经典主题（系统） |
-|:---:|:---:|
-| ![玻璃主题](workspace/screenshots/09-theme-glass.png) | ![经典主题](workspace/screenshots/10-theme-classic.png) |
-| 深邃玻璃质感，沉浸式体验 | 清爽系统风格，简洁高效 |
+<div align="center">
 
-> 还有暖色主题可选，支持跟随系统自动切换，在设置中随时更换。
+| 🌞 暖色主题 | 🌙 玻璃主题（暗色） | 📱 经典主题（系统） |
+|:---:|:---:|:---:|
+| （默认配色） | <img src="workspace/screenshots/09-theme-glass.png" width="200"> | <img src="workspace/screenshots/10-theme-classic.png" width="200"> |
+| 温暖柔和 | 深邃玻璃质感 | 清爽系统风格 |
+
+</div>
+
+> 支持跟随系统自动切换，在设置中随时更换。
 
 ## 🏗️ 技术栈
 
