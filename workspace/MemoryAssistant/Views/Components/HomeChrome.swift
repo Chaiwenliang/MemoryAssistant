@@ -204,6 +204,7 @@ private struct HomeRecentRecordRow: View {
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(colors.primaryText)
                     .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 if let secondary = secondaryText {
                     Text(secondary)
                         .font(.caption)
@@ -211,6 +212,7 @@ private struct HomeRecentRecordRow: View {
                         .lineLimit(1)
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             Spacer(minLength: 0)
 

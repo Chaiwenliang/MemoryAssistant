@@ -250,10 +250,12 @@ struct AllRecordsView: View {
                         )
 
                     VStack(alignment: .leading, spacing: 4) {
-                        HStack(spacing: 6) {
+                        HStack(alignment: .center, spacing: 8) {
                             Text(group.title)
                                 .font(.subheadline.weight(.medium))
                                 .foregroundStyle(ThemeColor.primaryText(for: currentScheme))
+                                .lineLimit(1)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                             Text("\(group.itemCount)")
                                 .font(.caption2.weight(.bold))
                                 .foregroundStyle(.white)

@@ -193,32 +193,34 @@ struct AdminConsoleView: View {
                 .padding(.vertical, 20)
             } else {
                 VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Text("成功: \(requestLogger.successCount)")
+                    HStack(spacing: 12) {
+                        Text("成功 \(requestLogger.successCount)")
                             .font(.caption)
                             .foregroundStyle(.green)
-                        Text("失败: \(requestLogger.failureCount)")
+                        Text("失败 \(requestLogger.failureCount)")
                             .font(.caption)
                             .foregroundStyle(.red)
-                        Spacer()
-                        Text("平均响应: \(requestLogger.averageResponseTimeMs)ms")
+                        Spacer(minLength: 8)
+                        Text("\(requestLogger.averageResponseTimeMs)ms")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
 
                     ForEach(requestLogger.logs.prefix(20)) { log in
                         VStack(alignment: .leading, spacing: 6) {
-                            HStack {
+                            HStack(spacing: 6) {
                                 Circle()
                                     .fill(log.status == .success ? Color.green : Color.red)
                                     .frame(width: 8, height: 8)
                                 Text(log.formattedDate)
                                     .font(.caption2)
                                     .foregroundStyle(.secondary)
+                                    .lineLimit(1)
                                 Text(log.model)
                                     .font(.caption2)
                                     .foregroundStyle(.blue)
-                                Spacer()
+                                    .lineLimit(1)
+                                Spacer(minLength: 8)
                                 Text("\(log.responseTimeMs)ms")
                                     .font(.caption2)
                                     .foregroundStyle(.secondary)

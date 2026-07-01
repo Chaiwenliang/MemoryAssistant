@@ -15,11 +15,11 @@ struct MemoryRowView: View {
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                HStack {
+                HStack(alignment: .top, spacing: 8) {
                     Text(record.title)
                         .font(.headline)
                         .lineLimit(2)
-                    Spacer(minLength: 0)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     Text(record.category.title)
                         .font(.caption2.weight(.medium))
                         .padding(.horizontal, 8)
